@@ -40,6 +40,8 @@
 		1BCF67C11D5293A900B71A6D /* IDSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */; };
 		1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C21D52961400B71A6D /* PaySettingViewController.swift */; };
 		1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9ED781D52032800F1A570 /* UserSpaceViewController.swift */; };
+		1BF636B31DB108D800197A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF636B21DB108D800197A06 /* LoginViewController.swift */; };
+		1BF636B51DB11FC000197A06 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF636B41DB11FC000197A06 /* SignupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67C21D52961400B71A6D /* PaySettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaySettingViewController.swift; sourceTree = "<group>"; };
 		1BE9ED781D52032800F1A570 /* UserSpaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpaceViewController.swift; sourceTree = "<group>"; };
+		1BF636B21DB108D800197A06 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1BF636B41DB11FC000197A06 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 		1B7E80F41D4B41F5007FD686 /* SchoolE */ = {
 			isa = PBXGroup;
 			children = (
+				1BF636B21DB108D800197A06 /* LoginViewController.swift */,
+				1BF636B41DB11FC000197A06 /* SignupViewController.swift */,
 				1B39FFCE1D4FAAB9001F649A /* UIBarExtension.swift */,
 				1B7CCDE31D53C45700B965AA /* SwiftNotice.swift */,
 				1B6195FA1D7B157100E52EF9 /* RGPageViewController.swift */,
@@ -231,9 +237,11 @@
 				1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */,
 				1B837BE31D4B575B00DB4A15 /* MainDetailViewController.swift in Sources */,
 				1B837BE91D4B7E5E00DB4A15 /* OrdersTableViewCell.swift in Sources */,
+				1BF636B51DB11FC000197A06 /* SignupViewController.swift in Sources */,
 				1B7E810D1D4B43DA007FD686 /* MainTableViewController.swift in Sources */,
 				1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */,
 				1B7E81111D4B48DB007FD686 /* Order1.swift in Sources */,
+				1BF636B31DB108D800197A06 /* LoginViewController.swift in Sources */,
 				1B13BAA11D830A2300FC5D3F /* OrderDetailViewController3.swift in Sources */,
 				1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */,
 				1BCF67BF1D52910900B71A6D /* TelSettingViewController.swift in Sources */,

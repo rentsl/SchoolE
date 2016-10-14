@@ -12,16 +12,33 @@ import CoreData
 class UserSpaceViewController: UIViewController {
 
     @IBOutlet weak var readView: UIView!
-    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userImageB: UIButton!
+    
+    @IBAction func toLogin(sender: UIButton) {
+        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("signup"))!, animated: true, completion: nil)
+    }
+    @IBAction func toSetName(sender: UIButton) {
+        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setName"))!, animated: true, completion: nil)
+    }
+    @IBAction func toSetTel(sender: UIButton) {
+        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setTel"))!, animated: true, completion: nil)
+    }
+    @IBAction func toSetPayNumber(sender: UIButton) {
+        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setPayNumber"))!, animated: true, completion: nil)
+    }
+    @IBAction func toSetSchool(sender: UIButton) {
+        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setSchool"))!, animated: true, completion: nil)
+    }
+
     
     var userLogin = LoginUser.sharedLoginUser
-    var user: [User] = []
-    var user1: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //取消按钮点击效果
+        userImageB.adjustsImageWhenHighlighted = false
         //
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -44,58 +61,16 @@ class UserSpaceViewController: UIViewController {
         readView.backgroundColor = UIColor(red: 243/255, green: 135/255, blue: 138/255, alpha: 1)
         
         
-//        //获取cocodata中User实体，放入user中
-//        
-//        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-//        let userRequest = NSFetchRequest(entityName: "User")
-//        
-//        do{
-//            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-//            
-//        }catch{
-//            print(error)
-//        }
-//
-//        user1 = user[0]
-//        //放入单例中
-//        userLogin.name = user1.name!
-//        userLogin.userImage = user1.userImage
-//        userLogin.paynumber = user1.paynumber!
-//        userLogin.school = user1.school!
-//        userLogin.studentID = user1.studentID!
-//        userLogin.userTel = user1.userTel!
-//        userLogin.userName = user1.userName!
-//        userLogin.password = user1.password!
-//        userLogin.state = 1
-        
-        userImage.image = UIImage(data: userLogin.userImage!)
+        userImageB.setImage(UIImage(data: userLogin.userImage!), forState: .Normal)
         userName.text = userLogin.userName
         
-        //图片圆角
-        imagecornerRadius(userImage)
-        print(userLogin.password)
     }
 
     override func viewDidAppear(animated: Bool) {
+   
+        userImageB.setImage(UIImage(data: userLogin.userImage!), forState: .Normal)
+        userName.text = userLogin.userName
         
-        //获取cocodata中User实体，放入user中
-        
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-        }catch{
-            print(error)
-        }
-        
-        user1 = user[0]
-        userImage.image = UIImage(data: user1.userImage!)
-        userName.text = user1.userName
-        
-        //图片圆角
-        imagecornerRadius(userImage)
     }
     
     override func didReceiveMemoryWarning() {
@@ -140,20 +115,24 @@ class UserSpaceViewController: UIViewController {
     }
     
     
-    @IBAction func userSettingBack(segue: UIStoryboardSegue){
+    @IBAction func userSettingBack(_ : UIStoryboardSegue){
         
     }
     
-    @IBAction func telSettingBack(segue: UIStoryboardSegue){
+    @IBAction func telSettingBack(_ : UIStoryboardSegue){
         
     }
     
-    @IBAction func IDSettingBack(segue: UIStoryboardSegue){
+    @IBAction func IDSettingBack(_ : UIStoryboardSegue){
         
     }
     
-    @IBAction func paySettingBack(segue: UIStoryboardSegue){
+    @IBAction func paySettingBack(_ : UIStoryboardSegue){
         
+    }
+    
+    @IBAction func signupBackToUserspeace(_ : UIStoryboardSegue){
+    
     }
 
 }
