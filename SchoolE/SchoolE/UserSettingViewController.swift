@@ -11,8 +11,8 @@ import CoreData
 
 class UserSettingViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
-    var user1: User!
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var inputUserName: UITextField!
@@ -46,7 +46,7 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
             self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
             //print(user.count)
             for user0 in user {
-                if user0.userTel == user1.userTel {
+                if user0.userTel == userLogin.userTel {
                     //print("hi")
                     user0.userImage = UIImagePNGRepresentation(userImage.image!)
                     user0.userName = inputUserName.text
@@ -63,6 +63,10 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         } catch {
             print(error)
         }
+        
+        //修改用户单例
+        userLogin.userImage = UIImagePNGRepresentation(userImage.image!)
+        userLogin.userName = inputUserName.text!
         
         notice("修改成功", type: NoticeType.success, autoClear: true, autoClearTime: 1)
         
@@ -89,24 +93,10 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         
         self.navigationController?.navigationBar.barStyle = .Default
         
-        //获取cocodata中User实体，放入user中
-        
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-        }catch{
-            print(error)
-        }
-        
-        user1 = user[0]
-        
         //组件赋初值
         
-        userImage.image = UIImage(data: user1.userImage!)
-        inputUserName.text = user1.userName
+        userImage.image = UIImage(data: userLogin.userImage!)
+        inputUserName.text = userLogin.userName
         userImage.frame = CGRectMake(0.0, 0.0, 60.0, 60.0)
         
         //图片圆角

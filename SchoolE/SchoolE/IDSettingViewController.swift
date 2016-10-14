@@ -11,6 +11,8 @@ import CoreData
 
 class IDSettingViewController: UIViewController {
 
+    var userLogin = LoginUser.sharedLoginUser
+    
     @IBOutlet weak var inputSchool: UITextField!
     @IBOutlet weak var inputName: UITextField!
     @IBOutlet weak var inputStudentID: UITextField!
@@ -32,7 +34,7 @@ class IDSettingViewController: UIViewController {
             self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
             //print(user.count)
             for user0 in user {
-                if user0.userTel == user1.userTel {
+                if user0.userTel == userLogin.userTel {
                     //print("hi")
                     user0.school = inputSchool.text
                     user0.name = inputName.text
@@ -52,6 +54,11 @@ class IDSettingViewController: UIViewController {
             print(error)
         }
         
+        //保存到用户单例
+        userLogin.school = inputSchool.text!
+        userLogin.name = inputName.text!
+        userLogin.studentID = inputStudentID.text!
+        
         notice("修改成功", type: NoticeType.success, autoClear: true, autoClearTime: 1)
         
         //退场
@@ -60,7 +67,6 @@ class IDSettingViewController: UIViewController {
     }
     
     var user: [User] = []
-    var user1: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,24 +86,11 @@ class IDSettingViewController: UIViewController {
         
         self.navigationController?.navigationBar.barStyle = .Default
         
-        //获取cocodata中User实体，放入user中
-        
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-        }catch{
-            print(error)
-        }
-        user1 = user[0]
-        
         //组件赋初值
         
-        inputSchool.text = user1.school
-        inputName.text = user1.name
-        inputStudentID.text = user1.studentID
+        inputSchool.text = userLogin.school
+        inputName.text = userLogin.name
+        inputStudentID.text = userLogin.studentID
         
     }
 

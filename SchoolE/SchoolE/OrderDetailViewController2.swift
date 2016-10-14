@@ -48,6 +48,8 @@ class OrderDetailViewController2: UIViewController {
             tel.text = myGetOrders.userTel
             time.text = myGetOrders.time
             
+            userImage.frame = CGRectMake(0.0, 0.0, 50.0, 50.0)
+            
             //图片圆角
             imagecornerRadius(userImage)
             
@@ -67,6 +69,11 @@ class OrderDetailViewController2: UIViewController {
             money.text = myOutOrders.money
             tel.text = myOutOrders.userTel
             time.text = myOutOrders.time
+            
+            userImage.frame = CGRectMake(0.0, 0.0, 50.0, 50.0)
+            
+            //图片圆角
+            imagecornerRadius(userImage)
             
             if myOutOrders.userName  == "Rentsl" && myOutOrders.orderState != "已完成" {
                 delButton.setImage(UIImage(named: "che"), forState: .Normal)

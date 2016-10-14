@@ -15,6 +15,7 @@ class UserSpaceViewController: UIViewController {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     
+    var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
     var user1: User!
     
@@ -43,25 +44,36 @@ class UserSpaceViewController: UIViewController {
         readView.backgroundColor = UIColor(red: 243/255, green: 135/255, blue: 138/255, alpha: 1)
         
         
-        //获取cocodata中User实体，放入user中
+//        //获取cocodata中User实体，放入user中
+//        
+//        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+//        let userRequest = NSFetchRequest(entityName: "User")
+//        
+//        do{
+//            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
+//            
+//        }catch{
+//            print(error)
+//        }
+//
+//        user1 = user[0]
+//        //放入单例中
+//        userLogin.name = user1.name!
+//        userLogin.userImage = user1.userImage
+//        userLogin.paynumber = user1.paynumber!
+//        userLogin.school = user1.school!
+//        userLogin.studentID = user1.studentID!
+//        userLogin.userTel = user1.userTel!
+//        userLogin.userName = user1.userName!
+//        userLogin.password = user1.password!
+//        userLogin.state = 1
         
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-        }catch{
-            print(error)
-        }
-
-        user1 = user[0]
-        userImage.image = UIImage(data: user1.userImage!)
-        userName.text = user1.userName
+        userImage.image = UIImage(data: userLogin.userImage!)
+        userName.text = userLogin.userName
         
         //图片圆角
         imagecornerRadius(userImage)
-        
+        print(userLogin.password)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -129,8 +141,6 @@ class UserSpaceViewController: UIViewController {
     
     
     @IBAction func userSettingBack(segue: UIStoryboardSegue){
-        
-        
         
     }
     

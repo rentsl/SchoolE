@@ -40,6 +40,8 @@ class OrderDetailViewController3: UIViewController {
         tel.text = myGetOrder.userTel
         time.text = myGetOrder.time
         
+        userImage.frame = CGRectMake(0.0, 0.0, 50.0, 50.0)
+    
         //图片圆角
         imagecornerRadius(userImage)
         
@@ -81,6 +83,7 @@ class OrderDetailViewController3: UIViewController {
     //图片圆角
     func imagecornerRadius(image: UIImageView) {
         image.layer.cornerRadius = image.frame.size.width/2
+
         image.clipsToBounds = true
     }
     

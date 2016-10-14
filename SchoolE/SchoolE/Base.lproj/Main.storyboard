@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="230"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PsK-uq-8Ld" id="wV3-Gl-xNm">
-                                    <frame key="frameInset" width="375" height="230"/>
+                                    <frame key="frameInset" width="375" height="229"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUA-Vu-yLk">
@@ -268,8 +268,6 @@
         <!--Add Order View Controller-->
         <scene sceneID="ce8-l0-cJk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3hN-5W-qRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="7R4-l9-CK8" userLabel="Exit" sceneMemberID="exit"/>
                 <viewController id="Xq1-eK-Ofl" customClass="AddOrderViewController" customModule="SchoolE" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PlM-rh-GNn"/>
@@ -359,6 +357,8 @@
                         <outlet property="tel" destination="AfX-cV-dMs" id="icA-2h-xd0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3hN-5W-qRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7R4-l9-CK8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2868" y="1688"/>
         </scene>
@@ -401,11 +401,11 @@
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderCell" rowHeight="150" id="8xV-EK-iyh" customClass="OrdersTableViewCell" customModule="SchoolE" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderCell" rowHeight="150" id="8xV-EK-iyh" customClass="OrdersTableViewCell" customModule="SchoolE" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="116" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8xV-EK-iyh" id="MRt-Rm-ZiQ">
-                                    <frame key="frameInset" width="375" height="150"/>
+                                    <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="菜鸟驿站" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igW-cY-ZIo">
@@ -712,11 +712,11 @@
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderCell3" rowHeight="150" id="F6C-dE-XmP" customClass="OrdersTableViewCell" customModule="SchoolE" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderCell3" rowHeight="150" id="F6C-dE-XmP" customClass="OrdersTableViewCell" customModule="SchoolE" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="116" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F6C-dE-XmP" id="Mqw-ZZ-gcs">
-                                    <frame key="frameInset" width="375" height="150"/>
+                                    <frame key="frameInset" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="菜鸟驿站" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muz-tz-fac">
@@ -1012,14 +1012,14 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="abp-Gs-BWD"/>
-                                <exclude reference="hcl-sw-Hi0"/>
-                                <exclude reference="mZx-tC-G7F"/>
+                                <exclude reference="FTb-9l-TTc"/>
                                 <exclude reference="M1N-Bh-9bd"/>
                                 <exclude reference="Sdb-CZ-dso"/>
                                 <exclude reference="JGC-rx-LvK"/>
                                 <exclude reference="eLu-in-UbY"/>
-                                <exclude reference="FTb-9l-TTc"/>
+                                <exclude reference="abp-Gs-BWD"/>
+                                <exclude reference="hcl-sw-Hi0"/>
+                                <exclude reference="mZx-tC-G7F"/>
                             </mask>
                         </variation>
                     </view>
@@ -1045,6 +1045,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="T4u-g2-7tI" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="nl4-1n-FjO">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>

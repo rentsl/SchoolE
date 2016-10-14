@@ -11,6 +11,8 @@ import CoreData
 
 class AddOrderViewController: UIViewController {
 
+    var systemTime = SystemTime.sharedTime
+    var userLogin = LoginUser.sharedLoginUser
     var order: Order!
     
     @IBOutlet weak var location: UITextField!
@@ -31,9 +33,9 @@ class AddOrderViewController: UIViewController {
         order.detail = detail.text
         order.money = money.text
         order.userTel = tel.text
-        order.userName = "Rentsl"
-        order.userImage = UIImagePNGRepresentation(UIImage(named: "b004")!)
-        order.time = "2016-07-15 21:34:10"
+        order.userName = userLogin.userName
+        order.userImage = userLogin.userImage
+        order.time = systemTime.getTime()
         order.orderState = "等人抢单"
         
         do {

@@ -15,6 +15,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var userLogin = LoginUser.sharedLoginUser
+    var user: [User] = []
+    var user1: User!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -31,6 +34,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
+        
+        //获取cocodata中User实体，放入user中
+        
+        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        let userRequest = NSFetchRequest(entityName: "User")
+        
+        do{
+            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
+            
+        }catch{
+            print(error)
+        }
+        
+        user1 = user[0]
+        //放入单例中
+        userLogin.name = user1.name!
+        userLogin.userImage = user1.userImage
+        userLogin.paynumber = user1.paynumber!
+        userLogin.school = user1.school!
+        userLogin.studentID = user1.studentID!
+        userLogin.userTel = user1.userTel!
+        userLogin.userName = user1.userName!
+        userLogin.password = user1.password!
+        userLogin.state = 1
    
         return true
     }

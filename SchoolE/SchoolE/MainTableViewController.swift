@@ -14,7 +14,8 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
 //    var orders: [Order] = [Order(location: "5号楼", detail: "这对我来说是一个非常重要的东西，有点重，要轻拿轻放", money: "6", userImage: "b001", UserName: "友人A", time: "2016-7-15 21:34:10",userTel:"18906622309",orderState:"等人抢单"),
 //                           Order(location: "南一门", detail: "一个小东西，具体私聊", money: "5", userImage: "b002", UserName: "友人B", time: "2016-7-15 21:34:10",userTel:"18906622309",orderState:"等人抢单"),
 //                           Order(location: "南二门", detail: "一个小东西，具体私聊", money: "4", userImage: "b003", UserName: "友人C", time: "2016-7-15 21:34:10",userTel:"18906622309",orderState:"等人抢单")]
-    
+    //var time = SystemTime.sharedTime
+    var userLogin = LoginUser.sharedLoginUser
     var orders:[Order] = []
     var user: [User] = []
     var user1 = User1.init(userName: "rentsl", userImage: "b004", password: "111", userTel: "18906622309", school: "HDU", studentID: "13055827", name: "Rentsl", payNumber: "1111")
@@ -110,15 +111,6 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
 //            print(error)
 //        }
         /*3******************************************************************/
-        //
-        
-        //UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     

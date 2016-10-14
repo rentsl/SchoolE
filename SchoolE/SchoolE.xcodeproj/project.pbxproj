@@ -31,6 +31,8 @@
 		1B7E81111D4B48DB007FD686 /* Order1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7E81101D4B48DB007FD686 /* Order1.swift */; };
 		1B837BE31D4B575B00DB4A15 /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B837BE21D4B575B00DB4A15 /* MainDetailViewController.swift */; };
 		1B837BE91D4B7E5E00DB4A15 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B837BE81D4B7E5E00DB4A15 /* OrdersTableViewCell.swift */; };
+		1BB23E861DB0F5FE00CB04E9 /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */; };
+		1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC68101DAF517D001BF2E4 /* LoginUser.swift */; };
 		1BBEFFDF1D53B64A00AFBB27 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */; };
 		1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEFFDE1D53B64A00AFBB27 /* User.swift */; };
 		1BCF67BD1D528CF100B71A6D /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67BC1D528CF100B71A6D /* UserSettingViewController.swift */; };
@@ -67,6 +69,8 @@
 		1B7E81101D4B48DB007FD686 /* Order1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order1.swift; sourceTree = "<group>"; };
 		1B837BE21D4B575B00DB4A15 /* MainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDetailViewController.swift; sourceTree = "<group>"; };
 		1B837BE81D4B7E5E00DB4A15 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
+		1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
+		1BBC68101DAF517D001BF2E4 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BBEFFDE1D53B64A00AFBB27 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1BCF67BC1D528CF100B71A6D /* UserSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 		1B7E80E91D4B41F5007FD686 = {
 			isa = PBXGroup;
 			children = (
+				1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */,
+				1BBC68101DAF517D001BF2E4 /* LoginUser.swift */,
 				1B78F7B01D83A654009C9B9D /* MyGetOrder+CoreDataProperties.swift */,
 				1B78F7B11D83A654009C9B9D /* MyGetOrder.swift */,
 				1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */,
@@ -220,6 +226,7 @@
 				1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */,
 				1B2DD2BA1D4C6304006B2E0F /* Order+CoreDataProperties.swift in Sources */,
 				1B39FFCF1D4FAAB9001F649A /* UIBarExtension.swift in Sources */,
+				1BB23E861DB0F5FE00CB04E9 /* SystemTime.swift in Sources */,
 				1BCF67BD1D528CF100B71A6D /* UserSettingViewController.swift in Sources */,
 				1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */,
 				1B837BE31D4B575B00DB4A15 /* MainDetailViewController.swift in Sources */,
@@ -228,6 +235,7 @@
 				1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */,
 				1B7E81111D4B48DB007FD686 /* Order1.swift in Sources */,
 				1B13BAA11D830A2300FC5D3F /* OrderDetailViewController3.swift in Sources */,
+				1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */,
 				1BCF67BF1D52910900B71A6D /* TelSettingViewController.swift in Sources */,
 				1B36AA7E1D7D431700B614F6 /* DataTableViewController3.swift in Sources */,
 				1B2DD2B71D4C5115006B2E0F /* AddOrderViewController.swift in Sources */,

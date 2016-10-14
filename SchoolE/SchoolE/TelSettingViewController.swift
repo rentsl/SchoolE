@@ -11,6 +11,8 @@ import CoreData
 
 class TelSettingViewController: UIViewController {
 
+    var userLogin = LoginUser.sharedLoginUser
+    
     @IBOutlet weak var inputPassword: UITextField!
     @IBOutlet weak var inputTel: UITextField!
     @IBAction func save(sender: UIBarButtonItem) {
@@ -34,7 +36,7 @@ class TelSettingViewController: UIViewController {
                 self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
                 //print(user.count)
                 for user0 in user {
-                    if user0.userTel == user1.userTel {
+                    if user0.userTel == userLogin.userTel {
                         user0.userTel = inputTel.text
                     }
                 }
@@ -49,6 +51,9 @@ class TelSettingViewController: UIViewController {
                 print(error)
             }
             
+            //保存到用户单例
+            userLogin.userTel = inputTel.text!
+            
             notice("修改成功", type: NoticeType.success, autoClear: true, autoClearTime: 1)
  
             //退场
@@ -61,7 +66,6 @@ class TelSettingViewController: UIViewController {
     }
     
     var user: [User] = []
-    var user1: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,23 +84,10 @@ class TelSettingViewController: UIViewController {
         }
         
         self.navigationController?.navigationBar.barStyle = .Default
-
-        //获取cocodata中User实体，放入user中
-        
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-        }catch{
-            print(error)
-        }
-        user1 = user[0]
         
         //组件赋初值
         
-        inputTel.text = user1.userTel
+        inputTel.text = userLogin.userTel
     }
 
     override func didReceiveMemoryWarning() {
@@ -108,7 +99,7 @@ class TelSettingViewController: UIViewController {
     
     func passwordTest() -> Bool {
         
-        if self.user1.password == inputPassword.text {
+        if self.userLogin.password == inputPassword.text {
             return true
         }
         
