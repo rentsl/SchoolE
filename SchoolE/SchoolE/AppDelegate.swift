@@ -34,30 +34,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
+        //读取文件中的用户信息
+        var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
         
-        //获取cocodata中User实体，放入user中
-        
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-        }catch{
-            print(error)
+        if sp.count > 0 {
+            let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
+            if let data = NSMutableDictionary(contentsOfURL: url){
+                userLogin.name = data.objectForKey("name") as! String
+                userLogin.password = data.objectForKey("password") as! String
+                userLogin.paynumber = data.objectForKey("paynumber") as! String
+                userLogin.school = data.objectForKey("school") as! String
+                userLogin.studentID = data.objectForKey("studentID") as! String
+                userLogin.userImage = data.objectForKey("userImage") as? NSData
+                userLogin.userName = data.objectForKey("userName") as! String
+                userLogin.userTel = data.objectForKey("userTel") as! String
+                userLogin.state = 1
+            }
+
         }
         
-        user1 = user[0]
-        //放入单例中
-        userLogin.name = user1.name!
-        userLogin.userImage = user1.userImage
-        userLogin.paynumber = user1.paynumber!
-        userLogin.school = user1.school!
-        userLogin.studentID = user1.studentID!
-        userLogin.userTel = user1.userTel!
-        userLogin.userName = user1.userName!
-        userLogin.password = user1.password!
-        userLogin.state = 1
+        //        //获取cocodata中User实体，放入user中
+//        
+//        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+//        let userRequest = NSFetchRequest(entityName: "User")
+//        
+//        do{
+//            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
+//            
+//        }catch{
+//            print(error)
+//        }
+//        
+//        user1 = user[0]
+//        //放入单例中
+//        userLogin.name = user1.name!
+//        userLogin.userImage = user1.userImage
+//        userLogin.paynumber = user1.paynumber!
+//        userLogin.school = user1.school!
+//        userLogin.studentID = user1.studentID!
+//        userLogin.userTel = user1.userTel!
+//        userLogin.userName = user1.userName!
+//        userLogin.password = user1.password!
+//        userLogin.state = 1
    
         return true
     }

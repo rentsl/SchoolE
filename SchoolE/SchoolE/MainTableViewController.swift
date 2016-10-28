@@ -177,7 +177,7 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
         cell.money.text = orders[indexPath.row].money
         cell.userImage.image = UIImage(data: orders[indexPath.row].userImage!)
         //我也不知道为什么要重新设置大小
-        cell.userImage.frame = CGRectMake(0.0, 0.0, 30.0, 30.0)
+        cell.userImage.frame = CGRectMake(172.5,152.0,30.0,30.0)
         cell.time.text = orders[indexPath.row].time
         
         //图片圆角

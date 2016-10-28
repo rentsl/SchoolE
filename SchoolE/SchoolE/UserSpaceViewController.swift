@@ -11,29 +11,67 @@ import CoreData
 
 class UserSpaceViewController: UIViewController {
 
+    var userLogin = LoginUser.sharedLoginUser
+    
     @IBOutlet weak var readView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImageB: UIButton!
     
     @IBAction func toLogin(sender: UIButton) {
-        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("signup"))!, animated: true, completion: nil)
+        if userLogin.state == 0 {
+            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("signup"))!, animated: true, completion: nil)
+        }else{
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let signout = UIAlertAction(title: "退出登录", style: .Default, handler: { (action) in
+                self.userLogin.name = ""
+                self.userLogin.password = ""
+                self.userLogin.paynumber = ""
+                self.userLogin.school = ""
+                self.userLogin.state = 0
+                self.userLogin.studentID = ""
+                self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named: "b004")!)
+                self.userLogin.userName = "请登录"
+                self.userLogin.userTel = ""
+                
+                self.userName.text = self.userLogin.userName
+                self.userImageB.setImage(UIImage(data: self.userLogin.userImage!), forState: .Normal)
+            })
+            let singuotCancel = UIAlertAction(title: "取消", style: .Default, handler: nil)
+            
+            alert.addAction(signout)
+            alert.addAction(singuotCancel)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     @IBAction func toSetName(sender: UIButton) {
-        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setName"))!, animated: true, completion: nil)
+        if self.userLogin.state == 1 {
+            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setName"))!, animated: true, completion: nil)
+        }else{
+            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+        }
     }
     @IBAction func toSetTel(sender: UIButton) {
-        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setTel"))!, animated: true, completion: nil)
+        if self.userLogin.state == 1 {
+            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setTel"))!, animated: true, completion: nil)
+        }else{
+            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+        }
     }
     @IBAction func toSetPayNumber(sender: UIButton) {
-        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setPayNumber"))!, animated: true, completion: nil)
+        if self.userLogin.state == 1 {
+            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setPayNumber"))!, animated: true, completion: nil)
+        }else{
+            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+        }
     }
     @IBAction func toSetSchool(sender: UIButton) {
-        self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setSchool"))!, animated: true, completion: nil)
+        if self.userLogin.state == 1 {
+            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setSchool"))!, animated: true, completion: nil)
+        }else{
+            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+        }
     }
 
-    
-    var userLogin = LoginUser.sharedLoginUser
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +109,22 @@ class UserSpaceViewController: UIViewController {
         userImageB.setImage(UIImage(data: userLogin.userImage!), forState: .Normal)
         userName.text = userLogin.userName
         
+        let dic: NSMutableDictionary = ["name":userLogin.name,"paynumber":userLogin.paynumber,"school":userLogin.school,"studentID":userLogin.studentID,"userTel":userLogin.userTel,"userName":userLogin.userName,"password":userLogin.password,"userImage":userLogin.userImage!]
+        
+        //创建文件
+        /*1******************************************/
+        var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
+        
+        if sp.count > 0 {
+            let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
+            
+            dic.writeToFile(url.path!, atomically: true)
+            
+        }
+        
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -132,6 +185,10 @@ class UserSpaceViewController: UIViewController {
     }
     
     @IBAction func signupBackToUserspeace(_ : UIStoryboardSegue){
+    
+    }
+    
+    @IBAction func userListBcak(_ : UIStoryboardSegue){
     
     }
 
