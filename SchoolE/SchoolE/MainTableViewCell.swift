@@ -9,7 +9,7 @@
 import UIKit
 
 var beginPoint: CGPoint = CGPoint.init(x: 0, y: 230)
-var endPoint: CGPoint = CGPoint.init(x: 600, y: 230)
+var endPoint: CGPoint = CGPoint.init(x: UIScreen.mainScreen().bounds.height, y: 230)
 
 class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var location: UILabel!

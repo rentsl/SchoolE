@@ -16,14 +16,16 @@ class LoginUser: NSObject {
             print("产生单例")
     }
     
-    var userName = "未登录"
+    var userName = "请登录"
     var userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)
-    var userTel = "18906622309"
-    var password = "31001453r"
-    var school = "HDU"
-    var name = "rentsl"
-    var studentID = "13055827"
-    var paynumber = "18906622309"
-    var state = 0
-    
+    var userTel = ""
+    var password = ""
+    var school = ""
+    var name = ""
+    var studentID = ""
+    var paynumber = ""
+    var state: Int = 0
+    var token = ""
+    var _id = ""
+    var authenticated = ""
 }

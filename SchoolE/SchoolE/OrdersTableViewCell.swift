@@ -11,7 +11,7 @@ import UIKit
 class OrdersTableViewCell: UITableViewCell {
 
     var beginPoint: CGPoint = CGPoint.init(x: 0, y: 150)
-    var endPoint: CGPoint = CGPoint.init(x: 600, y: 150)
+    var endPoint: CGPoint = CGPoint.init(x: UIScreen.mainScreen().bounds.height, y: 150)
     
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var detail: UILabel!

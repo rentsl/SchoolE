@@ -36,6 +36,7 @@
 		1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC68101DAF517D001BF2E4 /* LoginUser.swift */; };
 		1BBEFFDF1D53B64A00AFBB27 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */; };
 		1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEFFDE1D53B64A00AFBB27 /* User.swift */; };
+		1BCBF85D1DCDB5A700953AD8 /* ImageTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCBF85C1DCDB5A700953AD8 /* ImageTestViewController.swift */; };
 		1BCF67BD1D528CF100B71A6D /* UserSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67BC1D528CF100B71A6D /* UserSettingViewController.swift */; };
 		1BCF67BF1D52910900B71A6D /* TelSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67BE1D52910900B71A6D /* TelSettingViewController.swift */; };
 		1BCF67C11D5293A900B71A6D /* IDSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */; };
@@ -43,6 +44,7 @@
 		1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9ED781D52032800F1A570 /* UserSpaceViewController.swift */; };
 		1BF636B31DB108D800197A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF636B21DB108D800197A06 /* LoginViewController.swift */; };
 		1BF636B51DB11FC000197A06 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF636B41DB11FC000197A06 /* SignupViewController.swift */; };
+		F1BC40A7BB62ACD1B4237842 /* Pods_SchoolE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDA1710C19CB4161385BE3E5 /* Pods_SchoolE.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,7 @@
 		1BBC68101DAF517D001BF2E4 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BBEFFDE1D53B64A00AFBB27 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1BCBF85C1DCDB5A700953AD8 /* ImageTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTestViewController.swift; sourceTree = "<group>"; };
 		1BCF67BC1D528CF100B71A6D /* UserSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67BE1D52910900B71A6D /* TelSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDSettingViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +87,9 @@
 		1BE9ED781D52032800F1A570 /* UserSpaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpaceViewController.swift; sourceTree = "<group>"; };
 		1BF636B21DB108D800197A06 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1BF636B41DB11FC000197A06 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		5962CA716A315F2C2F0525A9 /* Pods-SchoolE.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolE.release.xcconfig"; path = "Pods/Target Support Files/Pods-SchoolE/Pods-SchoolE.release.xcconfig"; sourceTree = "<group>"; };
+		C3E04CA05B7055F175468D2D /* Pods-SchoolE.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SchoolE.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SchoolE/Pods-SchoolE.debug.xcconfig"; sourceTree = "<group>"; };
+		DDA1710C19CB4161385BE3E5 /* Pods_SchoolE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SchoolE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,12 +97,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1BC40A7BB62ACD1B4237842 /* Pods_SchoolE.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F99FAC0E2F19B861B884E3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDA1710C19CB4161385BE3E5 /* Pods_SchoolE.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1B7E80E91D4B41F5007FD686 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +125,8 @@
 				1B2DD2B91D4C6304006B2E0F /* Order.swift */,
 				1B7E80F41D4B41F5007FD686 /* SchoolE */,
 				1B7E80F31D4B41F5007FD686 /* Products */,
+				2DA77402B854FF176D679F9C /* Pods */,
+				0F99FAC0E2F19B861B884E3E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,9 +169,19 @@
 				1B7E81011D4B41F5007FD686 /* LaunchScreen.storyboard */,
 				1B7E81041D4B41F5007FD686 /* Info.plist */,
 				1B7E80FC1D4B41F5007FD686 /* SchoolE.xcdatamodeld */,
+				1BCBF85C1DCDB5A700953AD8 /* ImageTestViewController.swift */,
 				1BABD2E61DBF549300058EFE /* UserListTableViewController.swift */,
 			);
 			path = SchoolE;
+			sourceTree = "<group>";
+		};
+		2DA77402B854FF176D679F9C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3E04CA05B7055F175468D2D /* Pods-SchoolE.debug.xcconfig */,
+				5962CA716A315F2C2F0525A9 /* Pods-SchoolE.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7E81071D4B41F5007FD686 /* Build configuration list for PBXNativeTarget "SchoolE" */;
 			buildPhases = (
+				FC3E7EDD3317AEC5E063FD15 /* [CP] Check Pods Manifest.lock */,
 				1B7E80EE1D4B41F5007FD686 /* Sources */,
 				1B7E80EF1D4B41F5007FD686 /* Frameworks */,
 				1B7E80F01D4B41F5007FD686 /* Resources */,
+				BF6D857B315650664C3614A5 /* [CP] Embed Pods Frameworks */,
+				7172AC71F4297EAE8F2754F3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -191,6 +221,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = ZVFTJ2CSP8;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -225,6 +256,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7172AC71F4297EAE8F2754F3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SchoolE/Pods-SchoolE-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF6D857B315650664C3614A5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SchoolE/Pods-SchoolE-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC3E7EDD3317AEC5E063FD15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1B7E80EE1D4B41F5007FD686 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -244,6 +323,7 @@
 				1B7E810D1D4B43DA007FD686 /* MainTableViewController.swift in Sources */,
 				1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */,
 				1B7E81111D4B48DB007FD686 /* Order1.swift in Sources */,
+				1BCBF85D1DCDB5A700953AD8 /* ImageTestViewController.swift in Sources */,
 				1BF636B31DB108D800197A06 /* LoginViewController.swift in Sources */,
 				1BABD2E71DBF549300058EFE /* UserListTableViewController.swift in Sources */,
 				1B13BAA11D830A2300FC5D3F /* OrderDetailViewController3.swift in Sources */,
@@ -375,6 +455,7 @@
 		};
 		1B7E81081D4B41F5007FD686 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3E04CA05B7055F175468D2D /* Pods-SchoolE.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -387,11 +468,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		1B7E81091D4B41F5007FD686 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5962CA716A315F2C2F0525A9 /* Pods-SchoolE.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -404,6 +487,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

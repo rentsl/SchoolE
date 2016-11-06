@@ -8,9 +8,13 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class SignupViewController: UIViewController {
 
+    let signUpSucceed = "register success"
+    let signUpFaild = "ALREADY EXIST"
+    
     var user: [User] = []
     @IBOutlet weak var tel: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -18,31 +22,73 @@ class SignupViewController: UIViewController {
     
     @IBAction func confiemPassword(sender: UIButton) {
         
-        if (tel.text == nil || password.text == nil || confirmPassword.text == nil || confirmPassword.text != password.text){
+        if (tel.text == "" || password.text == "" || confirmPassword.text == "" || confirmPassword.text != password.text){
             notice("输入错误！", type: NoticeType.info, autoClear: true, autoClearTime: 1)
             return
         }
         
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: buffer!) as! User
         
-        user.name = tel.text
-        user.password = password.text
-        user.paynumber = ""
-        user.school = ""
-        user.studentID = ""
-        user.userImage = UIImagePNGRepresentation(UIImage(named: "b004")!)
-        user.userName = tel.text
-        user.userTel = tel.text
         
-        do{
-            try buffer?.save()
-        }catch{
-            print("用户存储失败！")
-            print(error)
+//        /reg        注册
+//        请求:{
+//            phone: number
+//            password: String
+//            ^username: String
+//            ^authenticated: Boolean
+//            ^school: String
+//            ^address: String
+//        }
+//        回复:{
+//            result: string
+//            register success    注册成功
+//            ALREADY EXIST       手机号已存在
+//        }
+        
+        let signUpUser = ["data":["phone":tel.text!,"password":password.text!,"username":"","authenticated":false,"school":"","address":"","student_id":"","pay_number":""]]
+        
+        Alamofire.request(.POST,"http://121.42.186.184:3000/reg",parameters: signUpUser).responseJSON { Response
+            in
+            guard let json = Response.result.value as? NSDictionary else {
+                self.notice("注册失败！", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+                return
+            }
+            //收到response后的操作
+            
+            if json.valueForKey("result") as! String == self.signUpSucceed {
+                print(json.valueForKey("result")!)
+                self.notice("注册成功", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+                
+                //将用户信息放入本地数据库
+                let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+                let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: buffer!) as! User
+                
+                user.name = self.tel.text
+                user.password = self.password.text
+                user.paynumber = ""
+                user.school = ""
+                user.studentID = ""
+                user.userImage = UIImagePNGRepresentation(UIImage(named: "b004")!)
+                user.userName = self.tel.text
+                user.userTel = self.tel.text
+                
+                do{
+                    try buffer?.save()
+                }catch{
+                    print("用户信息本地存储失败！")
+                    print(error)
+                }
+                
+            }else{
+                print(json.valueForKey("result")!)
+                self.notice("该用户已存在", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+                return
+            }
+                
+            //退场
+            self.performSegueWithIdentifier("backToSignIn", sender: sender)
+                
         }
-        //退场
-        performSegueWithIdentifier("backToSignIn", sender: sender)
+       
     }
    
     override func viewDidLoad() {

@@ -32,14 +32,37 @@ class UserSpaceViewController: UIViewController {
                 self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named: "b004")!)
                 self.userLogin.userName = "请登录"
                 self.userLogin.userTel = ""
+                self.userLogin._id = ""
+                self.userLogin.authenticated = "0"
+                self.userLogin.token = ""
+                
+                let dic: NSMutableDictionary = ["name":self.userLogin.name,"paynumber":self.userLogin.paynumber,"school":self.userLogin.school,"studentID":self.userLogin.studentID,"userTel":self.userLogin.userTel,"userName":self.userLogin.userName,"password":self.userLogin.password,"userImage":self.userLogin.userImage!,"state":self.userLogin.state,"_id":self.userLogin._id,"authenticated":self.userLogin.authenticated,"token":self.userLogin.token]
+                
+                //创建文件
+                /*1******************************************/
+                var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
+                
+                if sp.count > 0 {
+                    let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
+                    
+                    dic.writeToFile(url.path!, atomically: true)
+                    
+                }
                 
                 self.userName.text = self.userLogin.userName
                 self.userImageB.setImage(UIImage(data: self.userLogin.userImage!), forState: .Normal)
             })
-            let singuotCancel = UIAlertAction(title: "取消", style: .Default, handler: nil)
+            let singuotCancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
             
             alert.addAction(signout)
             alert.addAction(singuotCancel)
+            //ipad上必须加上
+            /********************************/
+            let x = userImageB.frame.origin.x + userImageB.frame.size.width/2
+            let y = userImageB.frame.origin.y + userImageB.frame.size.height
+            alert.popoverPresentationController?.sourceView = self.view
+            alert.popoverPresentationController?.sourceRect = CGRect(x: x,y: y,width: 1.0,height: 1.0)
+            /********************************/
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
@@ -109,19 +132,20 @@ class UserSpaceViewController: UIViewController {
         userImageB.setImage(UIImage(data: userLogin.userImage!), forState: .Normal)
         userName.text = userLogin.userName
         
-        let dic: NSMutableDictionary = ["name":userLogin.name,"paynumber":userLogin.paynumber,"school":userLogin.school,"studentID":userLogin.studentID,"userTel":userLogin.userTel,"userName":userLogin.userName,"password":userLogin.password,"userImage":userLogin.userImage!]
+        if userLogin.state != 0 {
+            let dic: NSMutableDictionary = ["name":self.userLogin.name,"paynumber":self.userLogin.paynumber,"school":self.userLogin.school,"studentID":self.userLogin.studentID,"userTel":self.userLogin.userTel,"userName":self.userLogin.userName,"password":self.userLogin.password,"userImage":self.userLogin.userImage!,"state":self.userLogin.state,"_id":self.userLogin._id,"authenticated":self.userLogin.authenticated,"token":self.userLogin.token]
         
-        //创建文件
-        /*1******************************************/
-        var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
+            //创建文件
+            /*1******************************************/
+            var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
         
-        if sp.count > 0 {
-            let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
+            if sp.count > 0 {
+                let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
             
-            dic.writeToFile(url.path!, atomically: true)
+                dic.writeToFile(url.path!, atomically: true)
             
+            }
         }
-        
     }
     
     

@@ -21,4 +21,11 @@ class SystemTime: NSObject {
         let strNowTime = timeFormatter.stringFromDate(date) as String
         return strNowTime
     }
+    func getNoBlankTime() -> (String){
+        let date = NSDate()
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "yyyMMddHHmmss"
+        let strNowTime = timeFormatter.stringFromDate(date) as String
+        return strNowTime
+    }
 }

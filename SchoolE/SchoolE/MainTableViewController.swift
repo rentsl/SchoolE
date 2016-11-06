@@ -18,7 +18,7 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
     var userLogin = LoginUser.sharedLoginUser
     var orders:[Order] = []
     var user: [User] = []
-    var user1 = User1.init(userName: "rentsl", userImage: "b004", password: "111", userTel: "18906622309", school: "HDU", studentID: "13055827", name: "Rentsl", payNumber: "1111")
+    //var user1 = User1.init(userName: "rentsl", userImage: "b004", password: "111", userTel: "18906622309", school: "HDU", studentID: "13055827", name: "Rentsl", payNumber: "1111")
     var frc: NSFetchedResultsController!
     
     override func viewDidLoad() {
@@ -59,43 +59,43 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
         
         /*3******************************************************************/
         //获取cocodata中User实体，放入user中
-        
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            
-//            //遍历值
-//            for info:User in user {
-//                print("hi")
-//                print("password=\(info.password)")
+//        
+//        let userRequest = NSFetchRequest(entityName: "User")
+//        
+//        do{
+//            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
+//            
+////            //遍历值
+////            for info:User in user {
+////                print("hi")
+////                print("password=\(info.password)")
+////            }
+//            
+//        }catch{
+//            print(error)
+//        }
+//        
+//        //在cocodata中存入第一组用户数据
+//        if user.count == 0 {
+//            
+//            let addUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: buffer!) as! User
+//            
+//            addUser.name = user1.name
+//            addUser.password = user1.password
+//            addUser.paynumber = user1.payNumber
+//            addUser.school = user1.school
+//            addUser.studentID = user1.studentID
+//            addUser.userImage = UIImagePNGRepresentation(UIImage(named: user1.userImage)!)
+//            addUser.userName = user1.userName
+//            addUser.userTel = user1.userTel
+//            
+//            do {
+//                try  buffer?.save()
+//            } catch {
+//                print(error)
 //            }
-            
-        }catch{
-            print(error)
-        }
-        
-        //在cocodata中存入第一组用户数据
-        if user.count == 0 {
-            
-            let addUser = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: buffer!) as! User
-            
-            addUser.name = user1.name
-            addUser.password = user1.password
-            addUser.paynumber = user1.payNumber
-            addUser.school = user1.school
-            addUser.studentID = user1.studentID
-            addUser.userImage = UIImagePNGRepresentation(UIImage(named: user1.userImage)!)
-            addUser.userName = user1.userName
-            addUser.userTel = user1.userTel
-            
-            do {
-                try  buffer?.save()
-            } catch {
-                print(error)
-            }
-            
-        }
+//            
+//        }
         
 //        //检查cocodata中User中的数据
 //        do{

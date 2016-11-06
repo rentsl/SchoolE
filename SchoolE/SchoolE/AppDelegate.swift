@@ -8,12 +8,17 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let signInTokenSucceed       = "SUCCESS"
+    let signInTokenPasswordError = "TOKEN ERROR"
+    let signInTokenNotExist      = "ID NOT EXIST"
+    
     var window: UIWindow?
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
@@ -34,24 +39,123 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         
+        
         //读取文件中的用户信息
         var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
         
         if sp.count > 0 {
             let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
+            print(url)
             if let data = NSMutableDictionary(contentsOfURL: url){
-                userLogin.name = data.objectForKey("name") as! String
-                userLogin.password = data.objectForKey("password") as! String
-                userLogin.paynumber = data.objectForKey("paynumber") as! String
-                userLogin.school = data.objectForKey("school") as! String
-                userLogin.studentID = data.objectForKey("studentID") as! String
-                userLogin.userImage = data.objectForKey("userImage") as? NSData
-                userLogin.userName = data.objectForKey("userName") as! String
-                userLogin.userTel = data.objectForKey("userTel") as! String
-                userLogin.state = 1
+                print("读取文件！")
+                
+//                userLogin.name = data.objectForKey("name") as! String
+//                userLogin.password = data.objectForKey("password") as! String
+//                userLogin.paynumber = data.objectForKey("paynumber") as! String
+//                userLogin.school = data.objectForKey("school") as! String
+//                userLogin.studentID = data.objectForKey("studentID") as! String
+//                userLogin.userImage = data.objectForKey("userImage") as? NSData
+//                userLogin.userName = data.objectForKey("userName") as! String
+//                userLogin.userTel = data.objectForKey("userTel") as! String
+//                userLogin.state = data.objectForKey("state") as! Int
+                
+                let tokenAndId = ["data":["_id":data.objectForKey("_id") as! String,"token":data.objectForKey("token") as! String]]
+                
+                Alamofire.request(.POST, "http://121.42.186.184:3000/token_login",parameters: tokenAndId).responseJSON{ Response in
+                    guard let json = Response.result.value as? NSDictionary else {return}
+                    if json.valueForKey("result") as! String == self.signInTokenSucceed {
+                        print("token登录成功！")
+                        
+                        if let jsonData = json.valueForKey("data") as? NSDictionary {
+                            //保存到用户单例
+                            self.userLogin._id = jsonData.valueForKey("_id") as! String
+                            self.userLogin.authenticated = ((jsonData.valueForKey("authenticated") as? NSNumber)?.stringValue)!
+                            self.userLogin.name = "" // 需要添加 服务器端还没
+                            self.userLogin.password = jsonData.valueForKey("password") as! String
+                            self.userLogin.paynumber = jsonData.valueForKey("pay_number") as! String
+                            self.userLogin.school = jsonData.valueForKey("school") as! String
+                            self.userLogin.studentID = jsonData.valueForKey("student_id") as! String
+                            self.userLogin.token = jsonData.valueForKey("token") as! String
+                            self.userLogin.userName = ((jsonData.valueForKey("phone") as? NSNumber)?.stringValue)!
+                            self.userLogin.userTel = ((jsonData.valueForKey("phone") as? NSNumber)?.stringValue)!
+                            self.userLogin.state = 1
+                            
+                            //处理用户头像
+                            /**
+                             *如果有就放入用户单例中
+                             *没有就把单例中的userImage赋值“b004”
+                             */
+                            if let jsonExtra = jsonData.valueForKey("extra") as? NSDictionary{
+                                if let jsonImageUrl = jsonExtra.valueForKey("image_url") as? String {
+                                    //下载图片 Alamofire 3.5
+                                    Alamofire.request(.GET, jsonImageUrl)
+                                        .responseData { responds in
+                                            guard let data = responds.result.value else {return}
+                                            print("下载完成！")
+                                            
+                                            self.userLogin.userImage = data
+                                        }
+                                        .progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
+                                            let percent = totalBytesRead*100/totalBytesExpectedToRead
+                                            print("已下载：\(totalBytesRead)  当前进度：\(percent)%")
+                                    }
+                                }else{self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)}
+                                
+                            }else{self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)}
+                        }
+                        
+                    }else if json.valueForKey("result") as! String == self.signInTokenPasswordError {
+                        print("token错误")
+
+                    }else if json.valueForKey("result") as! String == self.signInTokenNotExist {
+                        print("ID不存在！")
+                    }
+                    
+                }
+                
             }
 
         }
+        print(userLogin.state)
+        
+        //网络测试
+        Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders?.updateValue("application/json",forKey: "Content-Type")
+        Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders?.updateValue("application/json",forKey: "Accept")
+        
+
+        
+//        let user = ["data":["phone":"123","password":"123"]]
+//
+//        Alamofire.request(.POST,"http://121.42.186.184:3000/login",parameters: user).responseJSON { Response
+//            in
+//            
+//            guard let json = Response.result.value as? NSDictionary else {return}
+//            
+//            print(json)
+//            
+//            print(json.valueForKey("data")?.valueForKey("password") as! String)
+//        }
+        
+        //上传图片
+        
+//        Alamofire.upload(.POST, "http://121.42.186.184:3000/file/upload", multipartFormData: { MultipartFormData
+//            in
+//            let time = SystemTime.sharedTime.getNoBlankTime()
+//            let uploadImage = UIImage(named: "b004")
+//            let data = UIImageJPEGRepresentation(uploadImage!,1)
+//            let imageName = String(time) + ".png"
+//            
+//            MultipartFormData.appendBodyPart(data: data!, name: "displayImage", fileName: imageName, mimeType: "image/png")
+//        }) { encodingResult in
+//            switch encodingResult {
+//            case .Success(let upload, _, _):
+//                upload.responseJSON(completionHandler: { (response) in
+//                        print(response)
+//                })
+//            case .Failure(let encodingError):
+//                print(encodingError)
+//            }
+//        }
         
         //        //获取cocodata中User实体，放入user中
 //        
