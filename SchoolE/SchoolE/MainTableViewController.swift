@@ -8,25 +8,24 @@
 
 import UIKit
 import CoreData
+import Starscream
 
 class MainTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-//    var orders: [Order] = [Order(location: "5号楼", detail: "这对我来说是一个非常重要的东西，有点重，要轻拿轻放", money: "6", userImage: "b001", UserName: "友人A", time: "2016-7-15 21:34:10",userTel:"18906622309",orderState:"等人抢单"),
-//                           Order(location: "南一门", detail: "一个小东西，具体私聊", money: "5", userImage: "b002", UserName: "友人B", time: "2016-7-15 21:34:10",userTel:"18906622309",orderState:"等人抢单"),
-//                           Order(location: "南二门", detail: "一个小东西，具体私聊", money: "4", userImage: "b003", UserName: "友人C", time: "2016-7-15 21:34:10",userTel:"18906622309",orderState:"等人抢单")]
-    //var time = SystemTime.sharedTime
     var userLogin = LoginUser.sharedLoginUser
     var orders:[Order] = []
     var user: [User] = []
-    //var user1 = User1.init(userName: "rentsl", userImage: "b004", password: "111", userTel: "18906622309", school: "HDU", studentID: "13055827", name: "Rentsl", payNumber: "1111")
+
     var frc: NSFetchedResultsController!
+    
+    //var socket = WebSocket(url: NSURL(string: "ws://121.42.186.184:3000")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //属性设置
         /*1******************************************************************/
-        //去掉系统自带的分割线
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None //去掉系统自带的分割线
 
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
@@ -111,6 +110,16 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
 //            print(error)
 //        }
         /*3******************************************************************/
+        
+        //wesocket测试
+        
+
+//            socket.delegate = self
+//            socket.connect()
+//            print("myWebsocket")
+
+
+        
     }
 
     
@@ -246,6 +255,33 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
+    
+    
+   
+    
+    
+    
+//    // MARK: Websocket Delegate Methods.
+//    
+//    func websocketDidConnect(ws: WebSocket) {
+//        print("websocket is connected")
+//    }
+//    
+//    func websocketDidDisconnect(ws: WebSocket, error: NSError?) {
+//        if let e = error {
+//            print("websocket is disconnected: \(e.localizedDescription)")
+//        } else {
+//            print("websocket disconnected")
+//        }
+//    }
+//    
+//    func websocketDidReceiveMessage(ws: WebSocket, text: String) {
+//        print("Received text: \(text)")
+//    }
+//    
+//    func websocketDidReceiveData(ws: WebSocket, data: NSData) {
+//        print("Received data: \(data.length)")
+//    }
     
 
 }

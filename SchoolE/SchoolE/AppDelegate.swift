@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 import Alamofire
-
+import SocketIO
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
 
-    let signInTokenSucceed       = "SUCCESS"
+    let signInTokenSucceed       = "success"
     let signInTokenPasswordError = "TOKEN ERROR"
     let signInTokenNotExist      = "ID NOT EXIST"
     
@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
     var user1: User!
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -45,21 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if sp.count > 0 {
             let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
-            print(url)
+            print("文件路径:\(url)")
             if let data = NSMutableDictionary(contentsOfURL: url){
                 print("读取文件！")
                 
-//                userLogin.name = data.objectForKey("name") as! String
-//                userLogin.password = data.objectForKey("password") as! String
-//                userLogin.paynumber = data.objectForKey("paynumber") as! String
-//                userLogin.school = data.objectForKey("school") as! String
-//                userLogin.studentID = data.objectForKey("studentID") as! String
-//                userLogin.userImage = data.objectForKey("userImage") as? NSData
-//                userLogin.userName = data.objectForKey("userName") as! String
-//                userLogin.userTel = data.objectForKey("userTel") as! String
-//                userLogin.state = data.objectForKey("state") as! Int
-                
                 let tokenAndId = ["data":["_id":data.objectForKey("_id") as! String,"token":data.objectForKey("token") as! String]]
+                
+                
                 
                 Alamofire.request(.POST, "http://121.42.186.184:3000/token_login",parameters: tokenAndId).responseJSON{ Response in
                     guard let json = Response.result.value as? NSDictionary else {return}
@@ -85,23 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                              *如果有就放入用户单例中
                              *没有就把单例中的userImage赋值“b004”
                              */
-                            if let jsonExtra = jsonData.valueForKey("extra") as? NSDictionary{
-                                if let jsonImageUrl = jsonExtra.valueForKey("image_url") as? String {
-                                    //下载图片 Alamofire 3.5
-                                    Alamofire.request(.GET, jsonImageUrl)
-                                        .responseData { responds in
-                                            guard let data = responds.result.value else {return}
-                                            print("下载完成！")
-                                            
-                                            self.userLogin.userImage = data
-                                        }
-                                        .progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
-                                            let percent = totalBytesRead*100/totalBytesExpectedToRead
-                                            print("已下载：\(totalBytesRead)  当前进度：\(percent)%")
-                                    }
-                                }else{self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)}
-                                
-                            }else{self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)}
+                            
+                            if let fUserimage = data.objectForKey("userImage") {
+                                print("获取文件中的图片")
+                                self.userLogin.userImage = fUserimage as? NSData
+                            }else{
+                                self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)
+                            }
+                            
                         }
                         
                     }else if json.valueForKey("result") as! String == self.signInTokenPasswordError {
@@ -114,9 +96,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 
             }
-
+            
         }
         print(userLogin.state)
+        
+        //wesocket测试
+        
+        SocketConnect.socketConnect()
+
         
         //网络测试
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders?.updateValue("application/json",forKey: "Content-Type")
@@ -136,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(json.valueForKey("data")?.valueForKey("password") as! String)
 //        }
         
-        //上传图片
+          //上传图片
         
 //        Alamofire.upload(.POST, "http://121.42.186.184:3000/file/upload", multipartFormData: { MultipartFormData
 //            in
@@ -157,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-        //        //获取cocodata中User实体，放入user中
+//        //获取cocodata中User实体，放入user中
 //        
 //        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
 //        let userRequest = NSFetchRequest(entityName: "User")
@@ -204,6 +191,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        //写入文件的数据
+        UserWriteToFile.writeToFile()
     }
     
     // MARK: - Core Data stack
@@ -268,8 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-
+    
 
 }
 

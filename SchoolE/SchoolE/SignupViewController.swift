@@ -12,7 +12,7 @@ import Alamofire
 
 class SignupViewController: UIViewController {
 
-    let signUpSucceed = "register success"
+    let signUpSucceed = "success"
     let signUpFaild = "ALREADY EXIST"
     
     var user: [User] = []

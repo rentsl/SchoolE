@@ -12,12 +12,13 @@ import Alamofire
 
 class LoginViewController: UIViewController {
     
-    let signInSucceed       = "SUCCESS"
+    let signInSucceed       = "success"
     let signInPasswordError = "PASSWORD ERROR"
     let signInNotExist      = "NOT EXIST"
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
     
+    @IBOutlet var process: UIActivityIndicatorView!
     @IBOutlet weak var inputTel: UITextField!
     @IBOutlet weak var inputPassword: UITextField!
     @IBAction func login(sender: UIButton) {
@@ -31,11 +32,13 @@ class LoginViewController: UIViewController {
         /*1****************************************************************************************/
         let userSignIn = ["data":["phone":self.inputTel.text!,"password":self.inputPassword.text!]]
         Alamofire.request(.POST, "http://121.42.186.184:3000/login", parameters: userSignIn).responseJSON { Response in
+            
             guard let json = Response.result.value as? NSDictionary else {return}
             
             if json.valueForKey("result") as! String == self.signInSucceed{
                 print(json.valueForKey("result")!)
-                self.notice("登录成功", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+                self.process.startAnimating()
+                //self.notice("登录成功", type: NoticeType.info, autoClear: true, autoClearTime: 1)
                 print(Response)
                 
                 let jsonData = json.valueForKey("data") as? NSDictionary
@@ -58,43 +61,45 @@ class LoginViewController: UIViewController {
                  *如果有就放入用户单例中
                  *没有就把单例中的userImage赋值“b004”
                  */
-                if let jsonExtra = jsonData?.valueForKey("extra") as? NSDictionary{
-                    if let jsonImageUrl = jsonExtra.valueForKey("image_url") as? String {
-                        //下载图片 Alamofire 3.5
-                        Alamofire.request(.GET, jsonImageUrl)
-                            .responseData { responds in
-                                guard let data = responds.result.value else {return}
-                                print("下载完成！")
-                                
-                                self.userLogin.userImage = data
+                if let avatar = jsonData?.valueForKey("avatar") as? String{
+                    //下载图片 Alamofire 3.5
+                    var isDowning = false
+                    let imageURL = "http://121.42.186.184:3000/images/" + avatar
+                    Alamofire.request(.GET, imageURL)
+                        .responseData { responds in
+                            guard let data = responds.result.value else {return}
+                            
+                            self.process.stopAnimating()
+                            self.notice("登录成功", type: NoticeType.info, autoClear: true)
+                            print("下载完成！")
+                            
+                            self.userLogin.userImage = data
+                            //写入文件的数据
+                            UserWriteToFile.writeToFile()
+                            //转场
+                            self.performSegueWithIdentifier("signupBack", sender: sender)
+                        }
+                        .progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
+                            let percent = totalBytesRead*100/totalBytesExpectedToRead
+                            if isDowning == false {
+                                //self.process.startAnimating()
+                                print("hi")
+                                isDowning = true
                             }
-                            .progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
-                                let percent = totalBytesRead*100/totalBytesExpectedToRead
-                                print("已下载：\(totalBytesRead)  当前进度：\(percent)%")
-                            }
-                    }else{self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)}
+                            print("已下载：\(totalBytesRead)  当前进度：\(percent)%")
+                        }
                     
-                }else{self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)}
-                
-                
-                //写入文件的数据
-               let dic: NSMutableDictionary = ["name":self.userLogin.name,"paynumber":self.userLogin.paynumber,"school":self.userLogin.school,"studentID":self.userLogin.studentID,"userTel":self.userLogin.userTel,"userName":self.userLogin.userName,"password":self.userLogin.password,"userImage":self.userLogin.userImage!,"state":self.userLogin.state,"_id":self.userLogin._id,"authenticated":self.userLogin.authenticated,"token":self.userLogin.token]
-                
-                //创建文件
-                /*3******************************************/
-                var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
-                if sp.count > 0 {
-                    let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
-                    dic.writeToFile(url.path!, atomically: true)
-                    print(url)  
+                }else{
+                    self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)
+                    //写入文件的数据
+                    UserWriteToFile.writeToFile()
+                    self.notice("登录成功", type: NoticeType.info, autoClear: true)
+                    //转场
+                    self.performSegueWithIdentifier("signupBack", sender: sender)
                 }
                 
                 
-                /*3******************************************/
-
                 
-                //转场
-                self.performSegueWithIdentifier("signupBack", sender: sender)
                 
             }else if json.valueForKey("result") as! String == self.signInPasswordError{
                 print(json.valueForKey("result")!)
@@ -178,7 +183,11 @@ class LoginViewController: UIViewController {
         }
         
         self.navigationController?.navigationBar.barStyle = .Default
-
+        
+        process.hidesWhenStopped = true
+        process.center = view.center
+        view.addSubview(self.process)
+        //process.startAnimating()
 
         // Do any additional setup after loading the view.
     }

@@ -1534,9 +1534,14 @@
                     <connections>
                         <outlet property="inputPassword" destination="29b-AD-IGB" id="Q84-lY-Dig"/>
                         <outlet property="inputTel" destination="o6n-dk-zAB" id="0ex-Bu-NnD"/>
+                        <outlet property="process" destination="WQy-bH-Ymm" id="r69-bE-pHd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yI4-Bv-Qsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="WQy-bH-Ymm">
+                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
                 <exit id="ezt-T3-IGB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5528.8000000000002" y="2434.6326836581711"/>
@@ -1760,7 +1765,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nl9-nH-lGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5373.6000000000004" y="4064.617691154423"/>
+            <point key="canvasLocation" x="4702" y="3937"/>
+        </scene>
+        <!--Input1-->
+        <scene sceneID="Nxf-QU-F8g">
+            <objects>
+                <viewController id="Z7e-9Z-P72" customClass="input1" customModule="SchoolE" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UhA-76-KaA"/>
+                        <viewControllerLayoutGuide type="bottom" id="U4V-V1-nvJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AxK-kA-tfq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bk3-2d-xAO">
+                                <frame key="frameInset" minX="65" minY="282" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cod-Yj-7Y7">
+                                <frame key="frameInset" minX="65" minY="337" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7D-Qb-g92">
+                                <frame key="frameInset" minX="65" minY="386" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="hi"/>
+                                <connections>
+                                    <action selector="button:" destination="Z7e-9Z-P72" eventType="touchUpInside" id="8TI-jp-SpA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adh-n1-Cta">
+                                <frame key="frameInset" minX="65" minY="435" width="274" height="139"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="input1" destination="bk3-2d-xAO" id="Fmb-6e-BR6"/>
+                        <outlet property="input2" destination="cod-Yj-7Y7" id="NqL-kO-PBS"/>
+                        <outlet property="label" destination="adh-n1-Cta" id="Z6P-wR-nKj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LqR-94-D4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4701.6000000000004" y="4672.7136431784111"/>
         </scene>
         <!--Pay Setting View Controller-->
         <scene sceneID="hUS-U1-IDQ">

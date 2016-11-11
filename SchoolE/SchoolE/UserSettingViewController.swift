@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class UserSettingViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -35,6 +36,43 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
             return
         }
         
+        
+        //网络存储
+        /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+        
+        //上传图片
+        
+        Alamofire.upload(.POST, "http://121.42.186.184:3000/upload_avatar", multipartFormData: { MultipartFormData
+            in
+            let time = SystemTime.sharedTime.getNoBlankTime()
+            let uploadImage = self.userImage.image
+            let data = UIImageJPEGRepresentation(uploadImage!,1)
+            //let iD = NSData(base64EncodedString: "hi", options: NSDataBase64DecodingOptions(rawValue: NSUTF8StringEncoding))
+            let imageName = String(time) + ".png"
+        
+            MultipartFormData.appendBodyPart(data: data!, name: "image",fileName: imageName, mimeType: "image/png")
+            MultipartFormData.appendBodyPart(data:self.userLogin._id.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "_id")
+            MultipartFormData.appendBodyPart(data: "png".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, name: "extension")
+            
+        }) { encodingResult in
+            switch encodingResult {
+            case .Success(let upload, _, _):
+                upload.responseJSON(completionHandler: { (response) in
+                        print(response)
+                    print("succeed")
+                })
+            case .Failure(let encodingError):
+                print(encodingError)
+                print("error")
+            }
+        }
+
+        
+        /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+        
+        
+        //本地数据库存储
+        /*-----------------------------------------------------------*/
         //获取cocodata中User实体，放入user中
         
         let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
@@ -63,6 +101,7 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         } catch {
             print(error)
         }
+        /*-----------------------------------------------------------*/
         
         //修改用户单例
         userLogin.userImage = UIImagePNGRepresentation(userImage.image!)

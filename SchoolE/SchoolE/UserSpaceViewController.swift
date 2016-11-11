@@ -36,18 +36,8 @@ class UserSpaceViewController: UIViewController {
                 self.userLogin.authenticated = "0"
                 self.userLogin.token = ""
                 
-                let dic: NSMutableDictionary = ["name":self.userLogin.name,"paynumber":self.userLogin.paynumber,"school":self.userLogin.school,"studentID":self.userLogin.studentID,"userTel":self.userLogin.userTel,"userName":self.userLogin.userName,"password":self.userLogin.password,"userImage":self.userLogin.userImage!,"state":self.userLogin.state,"_id":self.userLogin._id,"authenticated":self.userLogin.authenticated,"token":self.userLogin.token]
-                
-                //创建文件
-                /*1******************************************/
-                var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
-                
-                if sp.count > 0 {
-                    let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
-                    
-                    dic.writeToFile(url.path!, atomically: true)
-                    
-                }
+                //写入文件的数据
+                UserWriteToFile.writeToFile()
                 
                 self.userName.text = self.userLogin.userName
                 self.userImageB.setImage(UIImage(data: self.userLogin.userImage!), forState: .Normal)
@@ -133,18 +123,10 @@ class UserSpaceViewController: UIViewController {
         userName.text = userLogin.userName
         
         if userLogin.state != 0 {
-            let dic: NSMutableDictionary = ["name":self.userLogin.name,"paynumber":self.userLogin.paynumber,"school":self.userLogin.school,"studentID":self.userLogin.studentID,"userTel":self.userLogin.userTel,"userName":self.userLogin.userName,"password":self.userLogin.password,"userImage":self.userLogin.userImage!,"state":self.userLogin.state,"_id":self.userLogin._id,"authenticated":self.userLogin.authenticated,"token":self.userLogin.token]
-        
-            //创建文件
-            /*1******************************************/
-            var sp = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
-        
-            if sp.count > 0 {
-                let url = NSURL(fileURLWithPath: "\(sp[0])/data.txt")
             
-                dic.writeToFile(url.path!, atomically: true)
+            //写入文件的数据
+            UserWriteToFile.writeToFile()
             
-            }
         }
     }
     

@@ -4,4 +4,7 @@ use_frameworks!
 
 target ’SchoolE’ do
     pod 'Alamofire', '~> 3.1’
+    pod 'Starscream', '~> 1.1.4’
+    pod 'SwiftyJSON', '2.4.0'
+    pod 'Socket.IO-Client-Swift', '~> 7.0.3'
 end

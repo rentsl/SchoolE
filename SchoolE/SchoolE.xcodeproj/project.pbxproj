@@ -41,6 +41,9 @@
 		1BCF67BF1D52910900B71A6D /* TelSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67BE1D52910900B71A6D /* TelSettingViewController.swift */; };
 		1BCF67C11D5293A900B71A6D /* IDSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */; };
 		1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C21D52961400B71A6D /* PaySettingViewController.swift */; };
+		1BE838551DD439AC00A93E04 /* SocketConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE838541DD439AC00A93E04 /* SocketConnect.swift */; };
+		1BE838571DD4433500A93E04 /* input1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE838561DD4433500A93E04 /* input1.swift */; };
+		1BE8385B1DD485E300A93E04 /* UserWriteToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */; };
 		1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9ED781D52032800F1A570 /* UserSpaceViewController.swift */; };
 		1BF636B31DB108D800197A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF636B21DB108D800197A06 /* LoginViewController.swift */; };
 		1BF636B51DB11FC000197A06 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF636B41DB11FC000197A06 /* SignupViewController.swift */; };
@@ -84,6 +87,9 @@
 		1BCF67BE1D52910900B71A6D /* TelSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67C21D52961400B71A6D /* PaySettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaySettingViewController.swift; sourceTree = "<group>"; };
+		1BE838541DD439AC00A93E04 /* SocketConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketConnect.swift; sourceTree = "<group>"; };
+		1BE838561DD4433500A93E04 /* input1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = input1.swift; sourceTree = "<group>"; };
+		1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWriteToFile.swift; sourceTree = "<group>"; };
 		1BE9ED781D52032800F1A570 /* UserSpaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpaceViewController.swift; sourceTree = "<group>"; };
 		1BF636B21DB108D800197A06 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1BF636B41DB11FC000197A06 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +121,8 @@
 		1B7E80E91D4B41F5007FD686 = {
 			isa = PBXGroup;
 			children = (
+				1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */,
+				1BE838541DD439AC00A93E04 /* SocketConnect.swift */,
 				1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */,
 				1BBC68101DAF517D001BF2E4 /* LoginUser.swift */,
 				1B78F7B01D83A654009C9B9D /* MyGetOrder+CoreDataProperties.swift */,
@@ -171,6 +179,7 @@
 				1B7E80FC1D4B41F5007FD686 /* SchoolE.xcdatamodeld */,
 				1BCBF85C1DCDB5A700953AD8 /* ImageTestViewController.swift */,
 				1BABD2E61DBF549300058EFE /* UserListTableViewController.swift */,
+				1BE838561DD4433500A93E04 /* input1.swift */,
 			);
 			path = SchoolE;
 			sourceTree = "<group>";
@@ -309,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE838571DD4433500A93E04 /* input1.swift in Sources */,
 				1B7CCDE61D53CEB100B965AA /* User1.swift in Sources */,
 				1B7CCDE21D53BDE000B965AA /* AppDelegate.swift in Sources */,
 				1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */,
@@ -316,6 +326,7 @@
 				1B39FFCF1D4FAAB9001F649A /* UIBarExtension.swift in Sources */,
 				1BB23E861DB0F5FE00CB04E9 /* SystemTime.swift in Sources */,
 				1BCF67BD1D528CF100B71A6D /* UserSettingViewController.swift in Sources */,
+				1BE8385B1DD485E300A93E04 /* UserWriteToFile.swift in Sources */,
 				1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */,
 				1B837BE31D4B575B00DB4A15 /* MainDetailViewController.swift in Sources */,
 				1B837BE91D4B7E5E00DB4A15 /* OrdersTableViewCell.swift in Sources */,
@@ -342,6 +353,7 @@
 				1B6195F91D7B157100E52EF9 /* RGViewPagerController.swift in Sources */,
 				1B78F7B31D83A654009C9B9D /* MyGetOrder.swift in Sources */,
 				1B7E80FE1D4B41F5007FD686 /* SchoolE.xcdatamodeld in Sources */,
+				1BE838551DD439AC00A93E04 /* SocketConnect.swift in Sources */,
 				1B6195FD1D7B157100E52EF9 /* DataTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
