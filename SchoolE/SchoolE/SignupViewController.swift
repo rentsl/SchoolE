@@ -16,6 +16,8 @@ class SignupViewController: UIViewController {
     let signUpFaild = "ALREADY EXIST"
     
     var user: [User] = []
+    let urlSginUp = MyURLs.urlSginUp
+    
     @IBOutlet weak var tel: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
@@ -46,7 +48,7 @@ class SignupViewController: UIViewController {
         
         let signUpUser = ["data":["phone":tel.text!,"password":password.text!,"username":"","authenticated":false,"school":"","address":"","student_id":"","pay_number":""]]
         
-        Alamofire.request(.POST,"http://121.42.186.184:3000/reg",parameters: signUpUser).responseJSON { Response
+        Alamofire.request(.POST,urlSginUp,parameters: signUpUser).responseJSON { Response
             in
             guard let json = Response.result.value as? NSDictionary else {
                 self.notice("注册失败！", type: NoticeType.info, autoClear: true, autoClearTime: 1)

@@ -10,14 +10,15 @@ import UIKit
 import Alamofire
 
 class ImageTestViewController: UIViewController {
-
+    
+    let urlImageDownTest = MyURLs.urlImageDownTest
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //下载图片 Alamofire 3.5
-        Alamofire.request(.GET, "http://121.42.186.184:3000/images/1.png")
+        Alamofire.request(.GET, urlImageDownTest)
         .responseData { responds in
             guard let data = responds.result.value else {return}
             print("下载完成！")

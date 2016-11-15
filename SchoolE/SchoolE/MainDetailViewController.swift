@@ -11,6 +11,7 @@ import UIKit
 class MainDetailViewController: UIViewController {
 
     var order:Order!
+    var orderLocal:OrderLocal!
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -25,13 +26,13 @@ class MainDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        userImage.image = UIImage(data: order.userImage!)
-        userName.text = order.userName
-        location.text = order.location
-        detail.text = order.detail
-        money.text = order.money
-        tel.text = order.userTel
-        time.text = order.time
+        userImage.image = UIImage(data: orderLocal.publisherImage!)
+        userName.text = orderLocal.publisherName
+        location.text = orderLocal.location
+        detail.text = orderLocal.detail
+        money.text = orderLocal.cost
+        tel.text = orderLocal.publisherTel
+        time.text = orderLocal.time
         userImage.frame = CGRectMake(0.0, 0.0, 50.0, 50.0)
         
         //图片圆角

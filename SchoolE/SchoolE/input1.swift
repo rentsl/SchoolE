@@ -8,8 +8,8 @@
 
 import UIKit
 
-class input1: UIViewController {
-
+class input1: UIViewController ,ChangeLable{
+    
     @IBOutlet weak var input1: UITextField!
     
     @IBOutlet weak var input2: UITextField!
@@ -17,21 +17,27 @@ class input1: UIViewController {
     @IBOutlet weak var label: UILabel!
     
     @IBAction func button(sender: UIButton) {
-        SocketConnect.socket.emit("fadan", input2.text!)
+        SocketConnect.socket.emit(input1.text!, input2.text!)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SocketConnect.socket.on("result") { data,_ in
-            self.label.text = String(data)
-        }
-        
+//        SocketConnect.socket.on("bc") { data,_ in
+//            self.label.text = String(data)
+//        }
+        let ppt = SocketChangeLable()
+        ppt.delegate = self
+        ppt.changeL()
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func changeLable(text: String) {
+        label.text = text
     }
     
 

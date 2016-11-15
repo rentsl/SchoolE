@@ -11,7 +11,8 @@ import SocketIO
 
 class SocketConnect: NSObject {
     //static internal let sharedSocket = SocketConnect()
-    static internal let socket = SocketIOClient(socketURL: NSURL(string: "ws://121.42.186.184:3000")!, config: [])
+    static let urlSocketConnect = MyURLs.urlSocketConnect
+    static internal let socket = SocketIOClient(socketURL: NSURL(string: urlSocketConnect)!, config: [])
     private override init() {
         print("生成Socket连接单例")
     }
@@ -37,5 +38,15 @@ class SocketConnect: NSObject {
         socket.connect()
       
     }
+    
+    static func getAvailableOrders() {
+        
+    }
+    
+    static func ordersChangedlistener() {
+        
+    }
+    
+    
     
 }

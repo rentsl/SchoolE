@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Alamofire
 import SocketIO
+import SwiftyJSON
 
 
 @UIApplicationMain
@@ -23,9 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
     var user1: User!
+    let urlTokenLogin = MyURLs.urlTokenLogin
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        SocketConnect.socketConnect()
+        
         UINavigationBar.appearance().barTintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
@@ -52,12 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                 
                 
                 
-                Alamofire.request(.POST, "http://121.42.186.184:3000/token_login",parameters: tokenAndId).responseJSON{ Response in
+                Alamofire.request(.POST, urlTokenLogin,parameters: tokenAndId).responseJSON{ Response in
                     guard let json = Response.result.value as? NSDictionary else {return}
                     if json.valueForKey("result") as! String == self.signInTokenSucceed {
                         print("token登录成功！")
                         
                         if let jsonData = json.valueForKey("data") as? NSDictionary {
+                            
                             //保存到用户单例
                             self.userLogin._id = jsonData.valueForKey("_id") as! String
                             self.userLogin.authenticated = ((jsonData.valueForKey("authenticated") as? NSNumber)?.stringValue)!
@@ -100,9 +106,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         }
         print(userLogin.state)
         
-        //wesocket测试
-        
-        SocketConnect.socketConnect()
+//        //wesocket测试
+//        
+//        SocketConnect.socketConnect()
 
         
         //网络测试

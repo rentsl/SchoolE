@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     let signInNotExist      = "NOT EXIST"
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
+    let urlLogIn = MyURLs.urlLogIn
+    let urlDownHeader = MyURLs.urlDownHeader
     
     @IBOutlet var process: UIActivityIndicatorView!
     @IBOutlet weak var inputTel: UITextField!
@@ -31,7 +33,7 @@ class LoginViewController: UIViewController {
         //正常的网络登录
         /*1****************************************************************************************/
         let userSignIn = ["data":["phone":self.inputTel.text!,"password":self.inputPassword.text!]]
-        Alamofire.request(.POST, "http://121.42.186.184:3000/login", parameters: userSignIn).responseJSON { Response in
+        Alamofire.request(.POST, urlLogIn, parameters: userSignIn).responseJSON { Response in
             
             guard let json = Response.result.value as? NSDictionary else {return}
             
@@ -64,7 +66,7 @@ class LoginViewController: UIViewController {
                 if let avatar = jsonData?.valueForKey("avatar") as? String{
                     //下载图片 Alamofire 3.5
                     var isDowning = false
-                    let imageURL = "http://121.42.186.184:3000/images/" + avatar
+                    let imageURL = self.urlDownHeader + avatar
                     Alamofire.request(.GET, imageURL)
                         .responseData { responds in
                             guard let data = responds.result.value else {return}

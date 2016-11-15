@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B116E301DD990E000CB99CA /* MyURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B116E2F1DD990E000CB99CA /* MyURLs.swift */; };
+		1B116E321DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B116E311DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift */; };
 		1B13BAA11D830A2300FC5D3F /* OrderDetailViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B13BAA01D830A2300FC5D3F /* OrderDetailViewController3.swift */; };
 		1B2DD2B71D4C5115006B2E0F /* AddOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2DD2B61D4C5115006B2E0F /* AddOrderViewController.swift */; };
 		1B2DD2BA1D4C6304006B2E0F /* Order+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2DD2B81D4C6304006B2E0F /* Order+CoreDataProperties.swift */; };
@@ -31,6 +33,10 @@
 		1B7E81111D4B48DB007FD686 /* Order1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7E81101D4B48DB007FD686 /* Order1.swift */; };
 		1B837BE31D4B575B00DB4A15 /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B837BE21D4B575B00DB4A15 /* MainDetailViewController.swift */; };
 		1B837BE91D4B7E5E00DB4A15 /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B837BE81D4B7E5E00DB4A15 /* OrdersTableViewCell.swift */; };
+		1B8CCADA1DDB3B4900417387 /* DownLoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8CCAD91DDB3B4900417387 /* DownLoadImage.swift */; };
+		1B9247321DD898E400C802CD /* MyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9247311DD898E400C802CD /* MyProtocol.swift */; };
+		1B9247341DD898E400C802CD /* SocketChangeLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9247331DD898E400C802CD /* SocketChangeLable.swift */; };
+		1B9247361DD898E400C802CD /* OrderLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9247351DD898E400C802CD /* OrderLocal.swift */; };
 		1BABD2E71DBF549300058EFE /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BABD2E61DBF549300058EFE /* UserListTableViewController.swift */; };
 		1BB23E861DB0F5FE00CB04E9 /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */; };
 		1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC68101DAF517D001BF2E4 /* LoginUser.swift */; };
@@ -51,6 +57,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B116E2F1DD990E000CB99CA /* MyURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyURLs.swift; sourceTree = "<group>"; };
+		1B116E311DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketGetAvailableOrders.swift; sourceTree = "<group>"; };
 		1B13BAA01D830A2300FC5D3F /* OrderDetailViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController3.swift; sourceTree = "<group>"; };
 		1B2DD2B61D4C5115006B2E0F /* AddOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddOrderViewController.swift; sourceTree = "<group>"; };
 		1B2DD2B81D4C6304006B2E0F /* Order+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Order+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 		1B7E81101D4B48DB007FD686 /* Order1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order1.swift; sourceTree = "<group>"; };
 		1B837BE21D4B575B00DB4A15 /* MainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDetailViewController.swift; sourceTree = "<group>"; };
 		1B837BE81D4B7E5E00DB4A15 /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
+		1B8CCAD91DDB3B4900417387 /* DownLoadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownLoadImage.swift; sourceTree = "<group>"; };
+		1B9247311DD898E400C802CD /* MyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProtocol.swift; sourceTree = "<group>"; };
+		1B9247331DD898E400C802CD /* SocketChangeLable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketChangeLable.swift; sourceTree = "<group>"; };
+		1B9247351DD898E400C802CD /* OrderLocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderLocal.swift; sourceTree = "<group>"; };
 		1BABD2E61DBF549300058EFE /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
 		1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
 		1BBC68101DAF517D001BF2E4 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
@@ -122,7 +134,12 @@
 			isa = PBXGroup;
 			children = (
 				1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */,
+				1B116E2F1DD990E000CB99CA /* MyURLs.swift */,
+				1B9247311DD898E400C802CD /* MyProtocol.swift */,
+				1B9247331DD898E400C802CD /* SocketChangeLable.swift */,
 				1BE838541DD439AC00A93E04 /* SocketConnect.swift */,
+				1B116E311DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift */,
+				1B8CCAD91DDB3B4900417387 /* DownLoadImage.swift */,
 				1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */,
 				1BBC68101DAF517D001BF2E4 /* LoginUser.swift */,
 				1B78F7B01D83A654009C9B9D /* MyGetOrder+CoreDataProperties.swift */,
@@ -173,6 +190,7 @@
 				1B837BE21D4B575B00DB4A15 /* MainDetailViewController.swift */,
 				1B7E81101D4B48DB007FD686 /* Order1.swift */,
 				1B7CCDE51D53CEB100B965AA /* User1.swift */,
+				1B9247351DD898E400C802CD /* OrderLocal.swift */,
 				1B7E80FF1D4B41F5007FD686 /* Assets.xcassets */,
 				1B7E81011D4B41F5007FD686 /* LaunchScreen.storyboard */,
 				1B7E81041D4B41F5007FD686 /* Info.plist */,
@@ -320,7 +338,9 @@
 			files = (
 				1BE838571DD4433500A93E04 /* input1.swift in Sources */,
 				1B7CCDE61D53CEB100B965AA /* User1.swift in Sources */,
+				1B9247361DD898E400C802CD /* OrderLocal.swift in Sources */,
 				1B7CCDE21D53BDE000B965AA /* AppDelegate.swift in Sources */,
+				1B116E321DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift in Sources */,
 				1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */,
 				1B2DD2BA1D4C6304006B2E0F /* Order+CoreDataProperties.swift in Sources */,
 				1B39FFCF1D4FAAB9001F649A /* UIBarExtension.swift in Sources */,
@@ -329,6 +349,7 @@
 				1BE8385B1DD485E300A93E04 /* UserWriteToFile.swift in Sources */,
 				1BE9ED791D52032800F1A570 /* UserSpaceViewController.swift in Sources */,
 				1B837BE31D4B575B00DB4A15 /* MainDetailViewController.swift in Sources */,
+				1B116E301DD990E000CB99CA /* MyURLs.swift in Sources */,
 				1B837BE91D4B7E5E00DB4A15 /* OrdersTableViewCell.swift in Sources */,
 				1BF636B51DB11FC000197A06 /* SignupViewController.swift in Sources */,
 				1B7E810D1D4B43DA007FD686 /* MainTableViewController.swift in Sources */,
@@ -351,9 +372,12 @@
 				1B2DD2BB1D4C6304006B2E0F /* Order.swift in Sources */,
 				1B6195FB1D7B157100E52EF9 /* RGPageViewController.swift in Sources */,
 				1B6195F91D7B157100E52EF9 /* RGViewPagerController.swift in Sources */,
+				1B9247321DD898E400C802CD /* MyProtocol.swift in Sources */,
 				1B78F7B31D83A654009C9B9D /* MyGetOrder.swift in Sources */,
 				1B7E80FE1D4B41F5007FD686 /* SchoolE.xcdatamodeld in Sources */,
+				1B9247341DD898E400C802CD /* SocketChangeLable.swift in Sources */,
 				1BE838551DD439AC00A93E04 /* SocketConnect.swift in Sources */,
+				1B8CCADA1DDB3B4900417387 /* DownLoadImage.swift in Sources */,
 				1B6195FD1D7B157100E52EF9 /* DataTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

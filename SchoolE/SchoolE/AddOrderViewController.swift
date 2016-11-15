@@ -26,23 +26,33 @@ class AddOrderViewController: UIViewController {
             return
         }
         
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let order = NSEntityDescription.insertNewObjectForEntityForName("Order", inManagedObjectContext: buffer!) as! Order
+        if userLogin._id == "" || userLogin.token == "" { return }
         
-        order.location = location.text
-        order.detail = detail.text
-        order.money = money.text
-        order.userTel = tel.text
-        order.userName = userLogin.userName
-        order.userImage = userLogin.userImage
-        order.time = systemTime.getTime()
-        order.orderState = "等人抢单"
+        let orderinformation = ["method":"order pulish","_id":self.userLogin._id,"token":self.userLogin.token,"data":["location":self.location.text!,"cost":180,"phone":180,"detail":self.detail.text!]]
         
-        do {
-            try  buffer?.save()
-        } catch {
-            print(error)
-        }
+        
+        SocketConnect.socket.emit("order publish", orderinformation)
+        
+        //本地存储操作
+        /*-------------------------------------------------------------*/
+//        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+//        let order = NSEntityDescription.insertNewObjectForEntityForName("Order", inManagedObjectContext: buffer!) as! Order
+//        
+//        order.location = location.text
+//        order.detail = detail.text
+//        order.money = money.text
+//        order.userTel = tel.text
+//        order.userName = userLogin.userName
+//        order.userImage = userLogin.userImage
+//        order.time = systemTime.getTime()
+//        order.orderState = "等人抢单"
+//        
+//        do {
+//            try  buffer?.save()
+//        } catch {
+//            print(error)
+//        }
+        /*-------------------------------------------------------------*/
         
         //退场
         performSegueWithIdentifier("backToRGPageView", sender: sender)

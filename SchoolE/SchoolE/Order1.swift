@@ -21,4 +21,4 @@ struct Order1 {
     
 }
 
-//Order(location: <#T##String#>, detail: <#T##String#>, money: <#T##String#>, userImage: <#T##String#>, UserName: <#T##String#>, time: <#T##String#>, userTel: <#T##String#>, orderState: <#T##String#>)
+//Order(location: String, detail: String, money: String, userImage: String, UserName: String, time: String, userTel: String, orderState: String)

@@ -14,6 +14,7 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
 
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
+    let urlUpLoadAvatar = MyURLs.urlUpLoadAvatar
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var inputUserName: UITextField!
@@ -42,7 +43,7 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         
         //上传图片
         
-        Alamofire.upload(.POST, "http://121.42.186.184:3000/upload_avatar", multipartFormData: { MultipartFormData
+        Alamofire.upload(.POST, urlUpLoadAvatar, multipartFormData: { MultipartFormData
             in
             let time = SystemTime.sharedTime.getNoBlankTime()
             let uploadImage = self.userImage.image
