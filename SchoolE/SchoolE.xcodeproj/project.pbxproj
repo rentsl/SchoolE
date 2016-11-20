@@ -40,6 +40,7 @@
 		1BABD2E71DBF549300058EFE /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BABD2E61DBF549300058EFE /* UserListTableViewController.swift */; };
 		1BB23E861DB0F5FE00CB04E9 /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */; };
 		1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC68101DAF517D001BF2E4 /* LoginUser.swift */; };
+		1BBDAFFE1DDD7D2E008C94D1 /* SocketGetOutAVOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBDAFFD1DDD7D2E008C94D1 /* SocketGetOutAVOrders.swift */; };
 		1BBEFFDF1D53B64A00AFBB27 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */; };
 		1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEFFDE1D53B64A00AFBB27 /* User.swift */; };
 		1BCBF85D1DCDB5A700953AD8 /* ImageTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCBF85C1DCDB5A700953AD8 /* ImageTestViewController.swift */; };
@@ -47,6 +48,10 @@
 		1BCF67BF1D52910900B71A6D /* TelSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67BE1D52910900B71A6D /* TelSettingViewController.swift */; };
 		1BCF67C11D5293A900B71A6D /* IDSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */; };
 		1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCF67C21D52961400B71A6D /* PaySettingViewController.swift */; };
+		1BCFD0021DDEA8A400F08ADC /* SocketGetGetActiveOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD0011DDEA8A400F08ADC /* SocketGetGetActiveOrders.swift */; };
+		1BCFD0041DDEB8B600F08ADC /* SocketGrabOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD0031DDEB8B600F08ADC /* SocketGrabOrder.swift */; };
+		1BCFD0071DDEFD6500F08ADC /* ImageCash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD0061DDEFD6500F08ADC /* ImageCash.swift */; };
+		1BCFD0091DDF173600F08ADC /* ChosePersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCFD0081DDF173600F08ADC /* ChosePersonViewController.swift */; };
 		1BE838551DD439AC00A93E04 /* SocketConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE838541DD439AC00A93E04 /* SocketConnect.swift */; };
 		1BE838571DD4433500A93E04 /* input1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE838561DD4433500A93E04 /* input1.swift */; };
 		1BE8385B1DD485E300A93E04 /* UserWriteToFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */; };
@@ -92,6 +97,7 @@
 		1BABD2E61DBF549300058EFE /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
 		1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
 		1BBC68101DAF517D001BF2E4 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		1BBDAFFD1DDD7D2E008C94D1 /* SocketGetOutAVOrders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketGetOutAVOrders.swift; sourceTree = "<group>"; };
 		1BBEFFDD1D53B64A00AFBB27 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1BBEFFDE1D53B64A00AFBB27 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1BCBF85C1DCDB5A700953AD8 /* ImageTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTestViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +105,10 @@
 		1BCF67BE1D52910900B71A6D /* TelSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67C01D5293A900B71A6D /* IDSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDSettingViewController.swift; sourceTree = "<group>"; };
 		1BCF67C21D52961400B71A6D /* PaySettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaySettingViewController.swift; sourceTree = "<group>"; };
+		1BCFD0011DDEA8A400F08ADC /* SocketGetGetActiveOrders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketGetGetActiveOrders.swift; sourceTree = "<group>"; };
+		1BCFD0031DDEB8B600F08ADC /* SocketGrabOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketGrabOrder.swift; sourceTree = "<group>"; };
+		1BCFD0061DDEFD6500F08ADC /* ImageCash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCash.swift; sourceTree = "<group>"; };
+		1BCFD0081DDF173600F08ADC /* ChosePersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChosePersonViewController.swift; sourceTree = "<group>"; };
 		1BE838541DD439AC00A93E04 /* SocketConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketConnect.swift; sourceTree = "<group>"; };
 		1BE838561DD4433500A93E04 /* input1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = input1.swift; sourceTree = "<group>"; };
 		1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWriteToFile.swift; sourceTree = "<group>"; };
@@ -134,11 +144,15 @@
 			isa = PBXGroup;
 			children = (
 				1BE8385A1DD485E300A93E04 /* UserWriteToFile.swift */,
+				1BCFD0061DDEFD6500F08ADC /* ImageCash.swift */,
 				1B116E2F1DD990E000CB99CA /* MyURLs.swift */,
 				1B9247311DD898E400C802CD /* MyProtocol.swift */,
 				1B9247331DD898E400C802CD /* SocketChangeLable.swift */,
 				1BE838541DD439AC00A93E04 /* SocketConnect.swift */,
 				1B116E311DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift */,
+				1BBDAFFD1DDD7D2E008C94D1 /* SocketGetOutAVOrders.swift */,
+				1BCFD0011DDEA8A400F08ADC /* SocketGetGetActiveOrders.swift */,
+				1BCFD0031DDEB8B600F08ADC /* SocketGrabOrder.swift */,
 				1B8CCAD91DDB3B4900417387 /* DownLoadImage.swift */,
 				1BB23E851DB0F5FE00CB04E9 /* SystemTime.swift */,
 				1BBC68101DAF517D001BF2E4 /* LoginUser.swift */,
@@ -176,6 +190,7 @@
 				1B6195FC1D7B157100E52EF9 /* DataTableViewController.swift */,
 				1B36AA7D1D7D431700B614F6 /* DataTableViewController3.swift */,
 				1B6195FE1D7B257500E52EF9 /* OrderDetailViewController2.swift */,
+				1BCFD0081DDF173600F08ADC /* ChosePersonViewController.swift */,
 				1B13BAA01D830A2300FC5D3F /* OrderDetailViewController3.swift */,
 				1B837BE81D4B7E5E00DB4A15 /* OrdersTableViewCell.swift */,
 				1B2DD2B61D4C5115006B2E0F /* AddOrderViewController.swift */,
@@ -339,6 +354,7 @@
 				1BE838571DD4433500A93E04 /* input1.swift in Sources */,
 				1B7CCDE61D53CEB100B965AA /* User1.swift in Sources */,
 				1B9247361DD898E400C802CD /* OrderLocal.swift in Sources */,
+				1BCFD0041DDEB8B600F08ADC /* SocketGrabOrder.swift in Sources */,
 				1B7CCDE21D53BDE000B965AA /* AppDelegate.swift in Sources */,
 				1B116E321DD9E2AA00CB99CA /* SocketGetAvailableOrders.swift in Sources */,
 				1BCF67C31D52961400B71A6D /* PaySettingViewController.swift in Sources */,
@@ -356,7 +372,9 @@
 				1BBEFFE01D53B64A00AFBB27 /* User.swift in Sources */,
 				1B7E81111D4B48DB007FD686 /* Order1.swift in Sources */,
 				1BCBF85D1DCDB5A700953AD8 /* ImageTestViewController.swift in Sources */,
+				1BBDAFFE1DDD7D2E008C94D1 /* SocketGetOutAVOrders.swift in Sources */,
 				1BF636B31DB108D800197A06 /* LoginViewController.swift in Sources */,
+				1BCFD0021DDEA8A400F08ADC /* SocketGetGetActiveOrders.swift in Sources */,
 				1BABD2E71DBF549300058EFE /* UserListTableViewController.swift in Sources */,
 				1B13BAA11D830A2300FC5D3F /* OrderDetailViewController3.swift in Sources */,
 				1BBC68111DAF517D001BF2E4 /* LoginUser.swift in Sources */,
@@ -367,6 +385,8 @@
 				1B6195FF1D7B257500E52EF9 /* OrderDetailViewController2.swift in Sources */,
 				1B78F7B21D83A654009C9B9D /* MyGetOrder+CoreDataProperties.swift in Sources */,
 				1B7E810F1D4B440B007FD686 /* MainTableViewCell.swift in Sources */,
+				1BCFD0091DDF173600F08ADC /* ChosePersonViewController.swift in Sources */,
+				1BCFD0071DDEFD6500F08ADC /* ImageCash.swift in Sources */,
 				1B7CCDE41D53C45700B965AA /* SwiftNotice.swift in Sources */,
 				1BBEFFDF1D53B64A00AFBB27 /* User+CoreDataProperties.swift in Sources */,
 				1B2DD2BB1D4C6304006B2E0F /* Order.swift in Sources */,

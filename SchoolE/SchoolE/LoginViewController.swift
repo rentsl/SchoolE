@@ -54,8 +54,8 @@ class LoginViewController: UIViewController {
                 self.userLogin.school = jsonData?.valueForKey("school") as! String
                 self.userLogin.studentID = jsonData?.valueForKey("student_id") as! String
                 self.userLogin.token = jsonData?.valueForKey("token") as! String
-                self.userLogin.userName = ((jsonData?.valueForKey("phone") as? NSNumber)?.stringValue)!
-                self.userLogin.userTel = ((jsonData?.valueForKey("phone") as? NSNumber)?.stringValue)!
+                self.userLogin.userName = jsonData?.valueForKey("phone") as! String
+                self.userLogin.userTel = jsonData?.valueForKey("phone") as! String
                 self.userLogin.state = 1
                 
                 //处理用户头像

@@ -158,7 +158,8 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-        userImage.image = image
+        let smallImage = UIImageJPEGRepresentation(image, 0.3)
+        userImage.image = UIImage(data: smallImage!)
         userImage.frame = CGRectMake(0.0, 0.0, 60.0, 60.0)
         
         //图片圆角

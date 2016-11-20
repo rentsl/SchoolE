@@ -8,14 +8,26 @@
 
 import Foundation
 
-protocol ChangeLable {
+protocol ChangeLable: NSObjectProtocol {
     func changeLable(text:String)
 }
 
-protocol AvailableOrderslisten {
+protocol AvailableOrderslisten: NSObjectProtocol {
     func getNewAvailableOrders(data: AnyObject)
 }
 
+protocol OutAvailableOrderslisten: NSObjectProtocol {
+    func getNewOutAvailableOrders(data: AnyObject)
+}
+
+protocol GetActiveOrdersListen: NSObjectProtocol {
+    func getNewGetActiveOrders(data: AnyObject)
+}
+
 protocol DownLoadImgeProtocol: NSObjectProtocol {
-    func getDownImage(index: Int, imageData: NSData)
+    func getDownImage(index: Int, imageData: NSData , info: String)
+}
+
+protocol GrabOrderListen: NSObjectProtocol {
+    func grabOrder(data: AnyObject)
 }

@@ -12,6 +12,7 @@ class MainDetailViewController: UIViewController {
 
     var order:Order!
     var orderLocal:OrderLocal!
+    var userLocal = LoginUser.sharedLoginUser
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -21,6 +22,11 @@ class MainDetailViewController: UIViewController {
     @IBOutlet weak var tel: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBAction func qiang(sender: UIButton) {
+        SocketConnect.socket.once("order grab") { data,ack in
+            self.performSegueWithIdentifier("backToMainT", sender: sender)
+        }
+        
+        grabRequest()
     }
     
     override func viewDidLoad() {
@@ -50,6 +56,16 @@ class MainDetailViewController: UIViewController {
     func imagecornerRadius(image: UIImageView) {
         image.layer.cornerRadius = image.frame.size.width/2
         image.clipsToBounds = true
+    }
+    
+    func grabRequest(){
+        guard userLocal._id != "" else{return}
+        
+        let items = ["method":"order grab",
+                     "_id":userLocal._id,
+                     "token":userLocal.token,
+                     "orderId":orderLocal.id]
+        SocketConnect.socket.emit("order grab", items)
     }
 
 

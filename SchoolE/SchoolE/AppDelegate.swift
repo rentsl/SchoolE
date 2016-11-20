@@ -73,8 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                             self.userLogin.school = jsonData.valueForKey("school") as! String
                             self.userLogin.studentID = jsonData.valueForKey("student_id") as! String
                             self.userLogin.token = jsonData.valueForKey("token") as! String
-                            self.userLogin.userName = ((jsonData.valueForKey("phone") as? NSNumber)?.stringValue)!
-                            self.userLogin.userTel = ((jsonData.valueForKey("phone") as? NSNumber)?.stringValue)!
+                            self.userLogin.userName = jsonData.valueForKey("phone") as! String
+                            self.userLogin.userTel = jsonData.valueForKey("phone") as! String
                             self.userLogin.state = 1
                             
                             //处理用户头像
@@ -114,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         //网络测试
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders?.updateValue("application/json",forKey: "Content-Type")
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders?.updateValue("application/json",forKey: "Accept")
+        
         
 
         
