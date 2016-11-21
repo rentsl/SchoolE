@@ -27,6 +27,8 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index:\(index)")
+        
+        orderGrabListener() //监听是否有人抢单
 
         let getOrders = SocketGetOutAVOrders()
         getOrders.delegate = self
@@ -221,6 +223,14 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
         }
     }
     
+    func orderGrabListener(){
+        SocketConnect.socket.on("order grab") { data,ack in
+            print("orderGrabListener:有人抢单!")
+            print("刷新列表")
+            self.noticeTop("有人抢单!", autoClear: true, autoClearTime: 1)
+            self.getOrdersRequest()
+        }
+    }
     
     
     //监听"得到outAvailableOrders"操作

@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+        print("application")
         SocketConnect.socketConnect()
         
         UINavigationBar.appearance().barTintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
@@ -55,12 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                 
                 let tokenAndId = ["data":["_id":data.objectForKey("_id") as! String,"token":data.objectForKey("token") as! String]]
                 
-                
-                
+
                 Alamofire.request(.POST, urlTokenLogin,parameters: tokenAndId).responseJSON{ Response in
                     guard let json = Response.result.value as? NSDictionary else {return}
                     if json.valueForKey("result") as! String == self.signInTokenSucceed {
                         print("token登录成功！")
+                        
+                        
                         
                         if let jsonData = json.valueForKey("data") as? NSDictionary {
                             
@@ -89,6 +90,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                             }else{
                                 self.userLogin.userImage = UIImagePNGRepresentation(UIImage(named:"b004")!)
                             }
+                            
+                            //等待token登陆和Socket连上后进行socketlogin
+                            SocketConnect.socket.once("connect") {_,_ in self.socketLogin()}
                             
                         }
                         
@@ -264,6 +268,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                 abort()
             }
         }
+    }
+    
+    func socketLogin(){
+        guard userLogin._id != "" else {return}
+        print("socketLogin")
+        SocketConnect.socket.once("login") { data,ack in
+            print("Socket Login Succeed!")
+        }
+        
+        let items = ["method":"login",
+                     "_id":self.userLogin._id,
+                     "token":self.userLogin.token]
+        SocketConnect.socket.emit("login", items)
     }
     
 

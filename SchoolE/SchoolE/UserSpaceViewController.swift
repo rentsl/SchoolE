@@ -41,6 +41,9 @@ class UserSpaceViewController: UIViewController {
                 
                 self.userName.text = self.userLogin.userName
                 self.userImageB.setImage(UIImage(data: self.userLogin.userImage!), forState: .Normal)
+                
+                //socket退登
+                self.socketLogout()
             })
             let singuotCancel = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
             
@@ -56,6 +59,8 @@ class UserSpaceViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
+    
+    
     @IBAction func toSetName(sender: UIButton) {
         if self.userLogin.state == 1 {
             self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setName"))!, animated: true, completion: nil)
@@ -137,7 +142,17 @@ class UserSpaceViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    //socket退登
+    func socketLogout(){
+        SocketConnect.socket.once("logout") { data,ack in
+            print("Socket Logout")
+        }
+        let items = ["method":"logout",
+                     "_id":self.userLogin._id,
+                     "token":self.userLogin.token]
+        SocketConnect.socket.emit("logout", items)
+    }
+    
     //图片圆角
     func imagecornerRadius(image: UIImageView) {
         image.layer.cornerRadius = image.frame.size.width/2

@@ -21,6 +21,7 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
 
     var frc: NSFetchedResultsController!
     
+    var imageNeedReadFromCash: Dictionary<String,String> = [:]
     
     
     let getImage = DownLoadImage()
@@ -46,6 +47,7 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
          */
         SocketConnect.socket.once("connect") { data,ack in
             self.getOrdersRequest()
+            
         }
         
         spinner.hidesWhenStopped = true
@@ -208,8 +210,7 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
 
     
     
-    
-    
+
     
     
     @IBAction func reflash(sender: UIBarButtonItem) {
@@ -219,15 +220,13 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
     
     
     func getOrdersRequest() {
+        print("getOrdersRequest")
         spinner.startAnimating()
         let items = ["hi"]
         SocketConnect.socket.emit("get orders", items)  
     }
     
-//    //通过OrderID来找它在ordersLocal中的位置
-//    func findIndexByOrderID(OrderID:String) -> NSIndexPath{
-//        
-//    }
+
     
     
     //监听单个AV订单是否发生变化(发送一个订单,删除,增加等)
@@ -251,7 +250,7 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
                 break
             }
             
-            self.noticeTop("活跃订单有变化", autoClear: true, autoClearTime: 1)
+            //self.noticeTop("活跃订单有变化", autoClear: true, autoClearTime: 1)
         }
     }
    
@@ -278,17 +277,37 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
         ordersLocal.removeAll()
         var j = 0
         for i in 0..<dataJson["data"].count where (dataJson["data"][i]["publisher"].string != userLogin._id){
-            let imageCashDidFilter = ImageCash.availableOrderImage
-            print("imageCashDidFilter:\(imageCashDidFilter.count)")
-            let imageCash = imageCashDidFilter.filter {$0.0 == dataJson["data"][i]["publisher"].string!}
-            if imageCash.count != 0{
-                imageData = imageCash[0].1
-            }else{
+        
+//            let imageDataCash = ImageCash.availableOrderImage[dataJson["data"][i]["publisher"].string!]
+//            let imageURLCash = ImageCash.imageRequestURLs[dataJson["data"][i]["publisher"].string!]
+//            let imageURLRequest = dataJson["data"][i]["publisher_avatar"].string!
+//                
+//            if (imageDataCash != nil && imageURLCash == imageURLRequest){
+//                imageData = imageDataCash
+//            }else{
+//                imageData = UIImagePNGRepresentation(UIImage(named:"b004")!)
+//                //缓存URLs
+//                ImageCash.imageDownQueueByURL[dataJson["data"][i]["publisher_avatar"].string!] = dataJson["data"][i]["publisher_avatar"].string!
+//                //获取用户头像并在回调函数中刷新视图
+//                self.getImage.downLoadImageWithURLAndIndex(j, imageURL: (MyURLs.urlDownHeader + dataJson["data"][i]["publisher_avatar"].string!),info: dataJson["data"][i]["publisher_avatar"].string!)
+//            }
+            
+            switch downImageState(dataJson["data"][i]["publisher_avatar"].string!) {
+            case "HaveCash":
+                imageData = ImageCash.imageDataByURl[dataJson["data"][i]["publisher_avatar"].string!]
+            case "DownLoading":
+                self.imageNeedReadFromCash[String(j)] = dataJson["data"][i]["publisher_avatar"].string!
+            case "NeedDownLoad":
                 imageData = UIImagePNGRepresentation(UIImage(named:"b004")!)
+                //缓存URLs
+                ImageCash.imageDownQueueByURL[dataJson["data"][i]["publisher_avatar"].string!] = dataJson["data"][i]["publisher_avatar"].string!
                 //获取用户头像并在回调函数中刷新视图
-                getImage.downLoadImageWithURLAndIndex(j, imageURL: (MyURLs.urlDownHeader + dataJson["data"][i]["publisher_avatar"].string!),info: dataJson["data"][i]["publisher"].string!)
+                self.getImage.downLoadImageWithURLAndIndex(j, imageURL: (MyURLs.urlDownHeader + dataJson["data"][i]["publisher_avatar"].string!),info: dataJson["data"][i]["publisher_avatar"].string!)
+            default:
+                imageData = UIImagePNGRepresentation(UIImage(named:"b004")!)
             }
-            ordersLocal.append(OrderLocal(
+            
+            self.ordersLocal.append(OrderLocal(
                 publisherImage: imageData,
                 publisherName: dataJson["data"][i]["publisher_name"].string!,
                 location: dataJson["data"][i]["location"].string!,
@@ -301,6 +320,8 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
                 id: dataJson["data"][i]["_id"].string!,
                 receiver: dataJson["data"][i]["receiver"].string!))
             j = j + 1
+            
+
         }
         print("j:\(j)")
         self.spinner.stopAnimating()
@@ -308,13 +329,30 @@ class MainTableViewController: UITableViewController, NSFetchedResultsController
         tableView.reloadData()
     }
     
-    
+    func downImageState(imageURL:String) -> String{
+        if (ImageCash.imageDataByURl[imageURL]) != nil {
+            return "HaveCash"
+        }else if (ImageCash.imageDownQueueByURL[imageURL] != nil) {
+            return "DownLoading"
+        }else{
+            return "NeedDownLoad"
+        }
+    }
     
     //监听"下载图片"事件
     func getDownImage(index: Int, imageData: NSData, info:String) {
         ordersLocal[index].publisherImage = imageData
         //图片缓存
-        ImageCash.availableOrderImage[info] = imageData
+        ImageCash.imageDataByURl[info] = imageData
+        
+        for (key,value) in imageNeedReadFromCash {
+            print(key,value)
+            if ImageCash.imageDataByURl[value] != nil {
+
+                ordersLocal[Int(key)!].publisherImage = ImageCash.imageDataByURl[value]
+            }
+        }
+        
         tableView.reloadData()
     }
     

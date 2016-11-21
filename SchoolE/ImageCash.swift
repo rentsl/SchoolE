@@ -15,4 +15,7 @@ class ImageCash{
     static var receiverImage: Dictionary<String,NSData> = [:]
     static var receiverNAme: Dictionary<String,String> = [:]
     static var availableOrderImage: Dictionary<String,NSData> = [:]
+    static var imageRequestURLs: Dictionary<String,String> = [:]
+    static var imageDataByURl: Dictionary<String,NSData> = [:]
+    static var imageDownQueueByURL: Dictionary<String,String> = [:]
 }

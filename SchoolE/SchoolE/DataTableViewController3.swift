@@ -25,6 +25,7 @@ class DataTableViewController3: UITableViewController,NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index:\(index)")
+        orderRefuseListener()
         
         let getOrders = SocketGetGetActiveOrders()
         getOrders.delegate = self
@@ -197,6 +198,16 @@ class DataTableViewController3: UITableViewController,NSFetchedResultsController
                      "_id":userLocal._id,
                      "token":userLocal.token]
         SocketConnect.socket.emit("grabbed order", items)
+    }
+    
+    func orderRefuseListener(){
+        guard self.userLocal._id != "" else {return}
+        
+        SocketConnect.socket.on("order refuse") { data, ack in
+            print("你有订单被拒接")
+            self.noticeTop("你有订单被拒接", autoClear: true, autoClearTime: 1)
+            self.getOrdersRequest()
+        }
     }
     
     //监听"得到GetActiveOrders"操作

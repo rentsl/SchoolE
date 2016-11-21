@@ -81,7 +81,7 @@ class ChosePersonViewController: UIViewController ,DownLoadImgeProtocol{
     }
     
     
-    
+    //网络获取receiver的信息
     func getReceiverInfo(receiverID: String){
         guard (ImageCash.receiverImage[receiverID] == nil) else {return}
         

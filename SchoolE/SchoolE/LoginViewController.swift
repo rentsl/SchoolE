@@ -100,8 +100,8 @@ class LoginViewController: UIViewController {
                     self.performSegueWithIdentifier("signupBack", sender: sender)
                 }
                 
-                
-                
+                //socketLogin登陆
+                self.socketLogin()
                 
             }else if json.valueForKey("result") as! String == self.signInPasswordError{
                 print(json.valueForKey("result")!)
@@ -199,7 +199,20 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    //socketLogin登陆
+    func socketLogin(){
+        guard userLogin._id != "" else {return}
+        print("socketLogin")
+        SocketConnect.socket.once("login") { data,ack in
+            print("Socket Login Succeed!")
+        }
+        
+        let items = ["method":"login",
+                     "_id":self.userLogin._id,
+                     "token":self.userLogin.token]
+        SocketConnect.socket.emit("login", items)
+    }
+    
     /*
     // MARK: - Navigation
 
