@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import CoreData
 import Alamofire
 
-class UserSettingViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UserSettingViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UpdateProfileProtocol {
 
     var userLogin = LoginUser.sharedLoginUser
     var user: [User] = []
     let urlUpLoadAvatar = MyURLs.urlUpLoadAvatar
+    let updateProfile = UpdateProfile()
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var inputUserName: UITextField!
     @IBAction func choseImage(sender: UIButton) {
@@ -71,42 +72,13 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         
         /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
         
+        //修改userName
         
-        //本地数据库存储
-        /*-----------------------------------------------------------*/
-        //获取cocodata中User实体，放入user中
-        
-        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        let userRequest = NSFetchRequest(entityName: "User")
-        
-        
-        //查并修改（根据手机号来查）
-        do{
-            self.user = try buffer!.executeFetchRequest(userRequest) as! [User]
-            //print(user.count)
-            for user0 in user {
-                if user0.userTel == userLogin.userTel {
-                    //print("hi")
-                    user0.userImage = UIImagePNGRepresentation(userImage.image!)
-                    user0.userName = inputUserName.text
-                }
-            }
-            
-        }catch{
-            print(error)
-        }
-        
-        //保存修改
-        do {
-            try  buffer?.save()
-        } catch {
-            print(error)
-        }
-        /*-----------------------------------------------------------*/
+        updateProfile.updateUserName(inputUserName.text!)
         
         //修改用户单例
         userLogin.userImage = UIImagePNGRepresentation(userImage.image!)
-        userLogin.userName = inputUserName.text!
+        
         
         notice("修改成功", type: NoticeType.success, autoClear: true, autoClearTime: 1)
         
@@ -118,26 +90,18 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateProfile.delegate = self
+        
         //navigationBar自定义
         title = "账号设置"
-        self.navigationController?.navigationBar.hideBottomHairline()
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
-        
-        if let font = UIFont(name: "Avenir-Light", size: 20) {
-            self.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName:UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1),
-                NSFontAttributeName:font
-            ]
-        }
-        
-        self.navigationController?.navigationBar.barStyle = .Default
+        self.navigationController?.navigationBar.setWhiteStyle()
         
         //组件赋初值
         
         userImage.image = UIImage(data: userLogin.userImage!)
         inputUserName.text = userLogin.userName
-        userImage.frame = CGRectMake(0.0, 0.0, 60.0, 60.0)
+        userImage.frame.size.width = 60.0
+        userImage.frame.size.height = 60.0
         
         //图片圆角
         imagecornerRadius(userImage)
@@ -160,7 +124,8 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         
         let smallImage = UIImageJPEGRepresentation(image, 0.3)
         userImage.image = UIImage(data: smallImage!)
-        userImage.frame = CGRectMake(0.0, 0.0, 60.0, 60.0)
+        userImage.frame.size.width = 60.0
+        userImage.frame.size.height = 60.0
         
         //图片圆角
         //imagecornerRadius(userImage)
@@ -175,6 +140,14 @@ class UserSettingViewController: UIViewController,UIImagePickerControllerDelegat
         image.clipsToBounds = true
     }
     
+    //监听修改昵称成功
+    func userNameBeUpdated() {
+        userLogin.userName = inputUserName.text!
+        //退场
+        notice("修改成功", type: NoticeType.success, autoClear: true, autoClearTime: 1)
+        performSegueWithIdentifier("IDBack", sender: saveButton)
+        updateProfile.delegate = nil
+    }
     
     /*
     // MARK: - Navigation

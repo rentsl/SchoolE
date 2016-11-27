@@ -9,6 +9,16 @@
 import UIKit
 import CoreData
 
+//////////////////////////////////////////
+//                                      //
+//                                      //
+//                                      //
+//                 作废                  //
+//                                      //
+//                                      //
+//                                      //
+//////////////////////////////////////////
+
 class TelSettingViewController: UIViewController {
 
     var userLogin = LoginUser.sharedLoginUser

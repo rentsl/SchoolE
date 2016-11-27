@@ -38,6 +38,42 @@ extension UINavigationBar {
     
 }
 
+//by Rentsl
+extension UINavigationBar{
+    
+    func setPinkStyle(){
+        self.barTintColor = UIPinkColor
+        self.tintColor = UIColor.whiteColor()
+        if let font = UIFont(name: "Avenir-Light", size: 20) {
+            self.titleTextAttributes = [
+                NSForegroundColorAttributeName:UIColor.whiteColor(),
+                NSFontAttributeName:font
+            ]
+        }
+        self.hideBottomHairline()
+        //关闭半透明
+        self.translucent = false
+        self.barStyle = .Black
+    }
+    
+    func setWhiteStyle(){
+        self.hideBottomHairline()
+        self.barTintColor = UIColor.whiteColor()
+        self.tintColor = UIPinkColor
+        //关闭半透明
+        self.translucent = false
+        
+        if let font = UIFont(name: "Avenir-Light", size: 20) {
+            self.titleTextAttributes = [
+                NSForegroundColorAttributeName:UIPinkColor,
+                NSFontAttributeName:font
+            ]
+        }
+        self.barStyle = .Default
+
+    }
+}
+
 extension UIToolbar {
     
     func hideHairline() {

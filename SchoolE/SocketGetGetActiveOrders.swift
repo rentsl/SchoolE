@@ -9,13 +9,29 @@
 import Foundation
 import SocketIO
 
+protocol GetActiveOrdersProtocol: NSObjectProtocol {
+    func getActiveOrdersListener(data: [OrderLocal])
+}
+
 class SocketGetGetActiveOrders{
-    var delegate:GetActiveOrdersListen?
+    var delegate:GetActiveOrdersProtocol?
+    var userLocal = LoginUser.sharedLoginUser
+    
     func getGetActiveOrders(){
-        print("getGetActiveOrders")
-        SocketConnect.socket.on("grabbed order") { data,ack in
-            self.delegate?.getNewGetActiveOrders(data)
-            print("从服务器取到GetActiveOrders")
+        print("启动getGetActiveOrders")
+        SocketConnect.socket.once("grabbed order") { data,ack in
+            let getActiveOrders = MyTools.socketIODataToJSON(data)
+            guard getActiveOrders["result"].string == _success else {return}
+            print("获取到getActiveOrders订单")
+            //print(getActiveOrders)
+            let finalOrders = MyTools.JSONOrdersToOrders(getActiveOrders)
+            self.delegate?.getActiveOrdersListener(finalOrders)
         }
+        SocketConnect.socket.emit(
+            "grabbed order",
+            ["method":"grabbed order",
+            "_id":userLocal._id,
+            "token":userLocal.token]
+        )
     }
 }

@@ -13,6 +13,7 @@ class UserSpaceViewController: UIViewController {
 
     var userLogin = LoginUser.sharedLoginUser
     
+    @IBOutlet weak var readViewImage: UIImageView!
     @IBOutlet weak var readView: UIView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImageB: UIButton!
@@ -68,20 +69,7 @@ class UserSpaceViewController: UIViewController {
             notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
         }
     }
-    @IBAction func toSetTel(sender: UIButton) {
-        if self.userLogin.state == 1 {
-            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setTel"))!, animated: true, completion: nil)
-        }else{
-            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
-        }
-    }
-    @IBAction func toSetPayNumber(sender: UIButton) {
-        if self.userLogin.state == 1 {
-            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setPayNumber"))!, animated: true, completion: nil)
-        }else{
-            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
-        }
-    }
+   
     @IBAction func toSetSchool(sender: UIButton) {
         if self.userLogin.state == 1 {
             self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("setSchool"))!, animated: true, completion: nil)
@@ -90,32 +78,28 @@ class UserSpaceViewController: UIViewController {
         }
     }
 
+    
+    @IBAction func toHistoryOrders(sender: UIButton) {
+        if self.userLogin.state == 1 {
+            self.presentViewController((storyboard?.instantiateViewControllerWithIdentifier("showHistoryOrders"))!, animated: true, completion: nil)
+        }else{
+            notice("请登录", type: NoticeType.info, autoClear: true, autoClearTime: 1)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //取消按钮点击效果
         userImageB.adjustsImageWhenHighlighted = false
-        //
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        
-        if let font = UIFont(name: "Avenir-Light", size: 20) {
-            self.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName:UIColor.whiteColor(),
-                NSFontAttributeName:font
-            ]
-        }
-        
-        self.navigationController?.navigationBar.hideBottomHairline()
-        
-        ////关闭半透明
-        //self.navigationController?.navigationBar.translucent = false
-        
+
+        //self.navigationController?.navigationBar.setPinkStyle()
         self.navigationController?.navigationBar.barStyle = .Black
-        //
+        self.navigationController?.navigationBar.hideBottomHairline()
+        self.navigationController?.navigationBar.backgroundColor = nil
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         
-        readView.backgroundColor = UIColor(red: 243/255, green: 135/255, blue: 138/255, alpha: 1)
         
+        readView.backgroundColor = UIPinkColor
         
         userImageB.setImage(UIImage(data: userLogin.userImage!), forState: .Normal)
         userName.text = userLogin.userName
@@ -128,10 +112,8 @@ class UserSpaceViewController: UIViewController {
         userName.text = userLogin.userName
         
         if userLogin.state != 0 {
-            
             //写入文件的数据
             UserWriteToFile.writeToFile()
-            
         }
     }
     
@@ -164,28 +146,7 @@ class UserSpaceViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "setID" {
-//            let destVC = segue.destinationViewController as! UserSettingViewController
-//            destVC.user1 = self.user1
-//        }
         
-//        if segue.identifier == "setUser" {
-//            let destVC = segue.destinationViewController as! IDSettingViewController
-//            destVC.user1 = self.user1
-//        }
-//        
-//        if segue.identifier == "setTel" {
-//            let destVC = segue.destinationViewController as! TelSettingViewController
-//            destVC.user1 = self.user1
-//        }
-//        
-//        if segue.identifier == "setPayNumber" {
-//            let destVC = segue.destinationViewController as! PaySettingViewController
-//            destVC.user1 = self.user1
-//        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
     
     
@@ -213,4 +174,7 @@ class UserSpaceViewController: UIViewController {
     
     }
 
+    @IBAction func historyOrdersBack(_: UIStoryboardSegue){
+        
+    }
 }

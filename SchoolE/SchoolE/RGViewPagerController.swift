@@ -8,9 +8,9 @@
 
 import Foundation
 import UIKit
-import CoreData
 
-class RGViewPagerController: RGPageViewController, RGPageViewControllerDataSource, RGPageViewControllerDelegate,NSFetchedResultsControllerDelegate {
+
+class RGViewPagerController: RGPageViewController, RGPageViewControllerDataSource, RGPageViewControllerDelegate {
 
 /******************
 */
@@ -40,8 +40,7 @@ class RGViewPagerController: RGPageViewController, RGPageViewControllerDataSourc
     
     override var barTintColor: UIColor? {
         get {
-            //return self.navigationController?.navigationBar.barTintColor
-            return UIColor(red: 243/255, green: 135/255, blue: 138/255, alpha: 1)
+            return self.navigationController?.navigationBar.barTintColor
         }
     }
     
@@ -75,6 +74,12 @@ class RGViewPagerController: RGPageViewController, RGPageViewControllerDataSourc
         }
     }
     
+    override var tabbarTop: CGFloat{
+        get{
+            return -44.0
+        }
+    }
+    
 /*
 ********************/
     
@@ -82,7 +87,7 @@ class RGViewPagerController: RGPageViewController, RGPageViewControllerDataSourc
     let title2 = "我发布的"
     var titles: [String]  = []
     
-    var frc: NSFetchedResultsController!
+
     
     var myOutOrders: [Order] = []
     var myGetOrders: [Order] = []
@@ -107,11 +112,11 @@ class RGViewPagerController: RGPageViewController, RGPageViewControllerDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barStyle = .Black
+//        self.navigationController?.navigationBar.barStyle = .Black
 //        //关闭半透明(可以解决右侧黑块问题)
-//        self.navigationController?.navigationBar.translucent = false
+//        //self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.setPinkStyle()
         
-        title = "订单管理"
         
         titles = [title1,title2]
                 

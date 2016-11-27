@@ -15,7 +15,6 @@ class OrderDetailViewController2: UIViewController {
     var selectRow: NSIndexPath?
     var myOutOrders: OrderLocal!
     var isDel: Bool?
-    var imageURL: String!
     var userLocal = LoginUser.sharedLoginUser
     
     
@@ -57,16 +56,6 @@ class OrderDetailViewController2: UIViewController {
             notice("错误", type: NoticeType.error, autoClear: true, autoClearTime: 1)
         }
         
-        
-        
-        
-        
-        //用于本地删除订单
-        /*++++++++++++++++++++++++++++++++++++++++++*/
-        //if index == 1{
-        //    isDel = true
-        //}
-        /*++++++++++++++++++++++++++++++++++++++++++*/
     }
     
 

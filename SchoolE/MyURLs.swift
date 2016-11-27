@@ -20,4 +20,22 @@ class MyURLs {
     static let urlUpLoadAvatar = "http://"+MyURLs.urlHeader+"/upload_avatar"
     static let urlImageDownTest = "http://"+MyURLs.urlHeader+"/images/1.png"
     static let urlSocketConnect = "ws://"+MyURLs.urlHeader
+    static let urlUpdateProfire = "http://"+MyURLs.urlHeader+"/update_profile"
 }
+
+enum NetResponeResult: String {
+    case success   = "success"
+    case grabbed   = "grabbed"
+    case confirmed = "confirmed"
+    case refused   = "refused"
+}
+
+let _success   = NetResponeResult.success.rawValue
+let _grabbed   = NetResponeResult.grabbed.rawValue
+let _confirmed = NetResponeResult.confirmed.rawValue
+let _refused   = NetResponeResult.refused.rawValue
+
+//changes
+let _new       = "new"
+let _remove    = "remove"
+let _vary      = "vary"

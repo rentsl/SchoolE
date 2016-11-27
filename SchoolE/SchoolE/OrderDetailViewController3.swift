@@ -40,10 +40,10 @@ class OrderDetailViewController3: UIViewController ,DownLoadImgeProtocol{
         getImage.delegate = self
         
         
-        if ((ImageCash.myGetActiveOrderImage[myGetOrder.publisherID]) != nil) {
-            userImage.image = UIImage(data: ImageCash.myGetActiveOrderImage[myGetOrder.publisherID]!)
+        if ((ImageCash.imageDataByURl[imageURL]) != nil) {
+            userImage.image = UIImage(data: ImageCash.imageDataByURl[imageURL]!)
         }else{
-            getImage.downLoadImageWithURLAndIndex(0, imageURL: (MyURLs.urlDownHeader + imageURL),info: "")
+            getImage.downLoadImageWithURLAndIndex(0, imageURL: imageURL,info: "")
             userImage.image = UIImage(data: myGetOrder.publisherImage!)
         }
         userName.text = myGetOrder.publisherName
@@ -128,15 +128,12 @@ class OrderDetailViewController3: UIViewController ,DownLoadImgeProtocol{
     //图片圆角
     func imagecornerRadius(image: UIImageView) {
         image.layer.cornerRadius = image.frame.size.width/2
-
         image.clipsToBounds = true
     }
     
     //监听下载图片事件
-    func getDownImage(index: Int, imageData: NSData,info: String) {
+    func downImageListener(index: Int, imageData: NSData,info: String) {
         self.userImage.image = UIImage(data: imageData)
-        //缓存
-        ImageCash.myGetActiveOrderImage[self.myGetOrder.publisherID] = imageData
     }
     
     /*

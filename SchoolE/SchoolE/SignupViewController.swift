@@ -18,6 +18,7 @@ class SignupViewController: UIViewController {
     var user: [User] = []
     let urlSginUp = MyURLs.urlSginUp
     
+    @IBOutlet weak var signButton: UIButton!
     @IBOutlet weak var tel: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
@@ -46,7 +47,21 @@ class SignupViewController: UIViewController {
 //            ALREADY EXIST       手机号已存在
 //        }
         
-        let signUpUser = ["data":["phone":tel.text!,"password":password.text!,"username":"","authenticated":false,"school":"","address":"","student_id":"","pay_number":""]]
+        let signUpUser =
+        [
+            "data":
+            [
+                "phone":tel.text!,
+                "password":password.text!,
+                "username":"",
+                "authenticated":false,
+                "school":"",
+                "address":"",
+                "student_id":"",
+                "pay_number":"",
+                "real_name":""
+            ]
+        ]
         
         Alamofire.request(.POST,urlSginUp,parameters: signUpUser).responseJSON { Response
             in
@@ -96,20 +111,10 @@ class SignupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        signButton.backgroundColor = UIPinkColor
         //navigationBar自定义
         title = "账号设置"
-        self.navigationController?.navigationBar.hideBottomHairline()
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
-        
-        if let font = UIFont(name: "Avenir-Light", size: 20) {
-            self.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName:UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1),
-                NSFontAttributeName:font
-            ]
-        }
-        
-        self.navigationController?.navigationBar.barStyle = .Default
+        self.navigationController?.navigationBar.setWhiteStyle()
         
         //得到user列表
         user = getUserData()

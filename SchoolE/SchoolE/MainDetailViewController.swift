@@ -8,11 +8,12 @@
 
 import UIKit
 
-class MainDetailViewController: UIViewController {
+class MainDetailViewController: UIViewController,GrabOrderProtocol {
 
     var order:Order!
     var orderLocal:OrderLocal!
     var userLocal = LoginUser.sharedLoginUser
+    var grabJudge = SocketGrabOrder()
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -21,17 +22,16 @@ class MainDetailViewController: UIViewController {
     @IBOutlet weak var money: UILabel!
     @IBOutlet weak var tel: UILabel!
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var qiangButton: UIButton!
     @IBAction func qiang(sender: UIButton) {
-        SocketConnect.socket.once("order grab") { data,ack in
-            self.performSegueWithIdentifier("backToMainT", sender: sender)
-        }
+        grabJudge.grabOrderJudge(orderLocal.id)
         
-        grabRequest()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        grabJudge.delegate = self
+        
         userImage.image = UIImage(data: orderLocal.publisherImage!)
         userName.text = orderLocal.publisherName
         location.text = orderLocal.location
@@ -52,23 +52,22 @@ class MainDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        print("MainDetailViewController id deinited")
+    }
+    
     //图片圆角
     func imagecornerRadius(image: UIImageView) {
         image.layer.cornerRadius = image.frame.size.width/2
         image.clipsToBounds = true
     }
     
-    func grabRequest(){
-        guard userLocal._id != "" else{return}
-        
-        let items = ["method":"order grab",
-                     "_id":userLocal._id,
-                     "token":userLocal.token,
-                     "orderId":orderLocal.id]
-        SocketConnect.socket.emit("order grab", items)
+
+    func grabSucceed(data: AnyObject) {
+        grabJudge.delegate = nil
+        self.performSegueWithIdentifier("backToMainT", sender: qiangButton)
     }
-
-
+    
     /*
     // MARK: - Navigation
 

@@ -11,7 +11,20 @@ class UserWriteToFile {
     static internal var userLogin = LoginUser.sharedLoginUser
     static func writeToFile() {
         //写入文件的数据
-        let dic: NSMutableDictionary = ["name":self.userLogin.name,"paynumber":self.userLogin.paynumber,"school":self.userLogin.school,"studentID":self.userLogin.studentID,"userTel":self.userLogin.userTel,"userName":self.userLogin.userName,"password":self.userLogin.password,"userImage":self.userLogin.userImage!,"state":self.userLogin.state,"_id":self.userLogin._id,"authenticated":self.userLogin.authenticated,"token":self.userLogin.token]
+        let dic: NSMutableDictionary = [
+            "name":self.userLogin.name,
+            "paynumber":self.userLogin.paynumber,
+            "school":self.userLogin.school,
+            "studentID":self.userLogin.studentID,
+            "userTel":self.userLogin.userTel,
+            "userName":self.userLogin.userName,
+            "password":self.userLogin.password,
+            "userImage":self.userLogin.userImage!,
+            "state":self.userLogin.state,
+            "_id":self.userLogin._id,
+            "authenticated":self.userLogin.authenticated,
+            "token":self.userLogin.token
+        ]
         
         //创建文件
         /*3******************************************/

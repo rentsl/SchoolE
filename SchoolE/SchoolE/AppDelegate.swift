@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         print("application")
         SocketConnect.socketConnect()
         
-        UINavigationBar.appearance().barTintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
+        UINavigationBar.appearance().barTintColor = UIPinkColor
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
         if let font = UIFont(name: "Avenir-Light", size: 20) {
@@ -42,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         }
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        UITabBar.appearance().tintColor = UIPinkColor
+        
         
         
         //读取文件中的用户信息

@@ -7,31 +7,33 @@
 //
 
 import UIKit
-import CoreData
-import SwiftyJSON
 
-class DataTableViewController3: UITableViewController,NSFetchedResultsControllerDelegate,GetActiveOrdersListen {
+class DataTableViewController3: UITableViewController,GetActiveOrdersProtocol,RefuseOrderProtocol,ConfirmOrderProtocol {
 
-    var isDel = false
-    var frc: NSFetchedResultsController!
     var index = 0
     var imageURLs: [String] = []
     var selectRow: NSIndexPath?
     var userLocal = LoginUser.sharedLoginUser
     var myGetOrders: [OrderLocal] = []
+    let getOrders = SocketGetGetActiveOrders()
+    let refusedListener = RefuseOrder()
+    let comfirmedListener = ConfirmOrder()
     
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index:\(index)")
-        orderRefuseListener()
-        
-        let getOrders = SocketGetGetActiveOrders()
+        //myGetorderStateListener()
+    
         getOrders.delegate = self
-        getOrders.getGetActiveOrders()
+        refusedListener.delegate = self
+        comfirmedListener.delegate = self
         
-        getOrdersRequest() //请求获取数据
+        refusedListener.refusedListener()
+        comfirmedListener.comfirmedListener()
+        
+        hiGetOrders() //请求获取数据
         
         spinner.hidesWhenStopped = true
         spinner.center = view.center
@@ -41,7 +43,7 @@ class DataTableViewController3: UITableViewController,NSFetchedResultsController
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = UIColor.whiteColor()
         refreshControl?.tintColor = UIColor.grayColor()
-        refreshControl?.addTarget(self, action: "getOrdersRequest", forControlEvents: .ValueChanged)
+        refreshControl?.addTarget(self, action: "hiGetOrders", forControlEvents: .ValueChanged)
         
         
         //UI属性操作
@@ -49,62 +51,7 @@ class DataTableViewController3: UITableViewController,NSFetchedResultsController
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None //去掉系统自带的分割线
         /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
         
-        
-        
-        
-        
-        
-        //本地cocodata数据请求
-        /*--------------------------------------------------------------*/
-        //let request = NSFetchRequest(entityName: "MyGetOrder")
-        //request.sortDescriptors = [NSSortDescriptor(key: "location", ascending: true)]
-        //let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        //frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: buffer!, sectionNameKeyPath: nil, cacheName: nil)
-        //frc.delegate = self
-        //
-        //
-        //do {
-        //    try frc.performFetch()
-        //    myGetOrders =  frc.fetchedObjects as! [MyGetOrder]
-        //} catch {
-        //    print(error)
-        //}
-        /*--------------------------------------------------------------*/
-        
-        //当cocodata中的数据发生变化时发生变化
-        /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-        //func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        //    tableView.beginUpdates()
-        //}
-        //
-        //func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        //    tableView.endUpdates()
-        //}
-        //
-        //func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        //    //不是很理解 这里的if语句
-        //        switch type {
-        //        case .Insert:
-        //            if let _newIndexPath = newIndexPath {
-        //                tableView.insertRowsAtIndexPaths([_newIndexPath], withRowAnimation: .Automatic)
-        //            }
-        //        case .Delete:
-        //            if let _indexPath = indexPath {
-        //                tableView.deleteRowsAtIndexPaths([_indexPath], withRowAnimation: .Automatic)
-        //            }
-        //
-        //        case .Update:
-        //            if let _indexPath = indexPath {
-        //                tableView.reloadRowsAtIndexPaths([_indexPath], withRowAnimation: .Automatic)
-        //            }
-        //        default:
-        //            tableView.reloadData()
-        //
-        //        }
-        //
-        //    myGetOrders = controller.fetchedObjects as! [MyGetOrder]
-        //}
-        /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 
     }
 
@@ -114,7 +61,7 @@ class DataTableViewController3: UITableViewController,NSFetchedResultsController
     }
     
     override func viewDidAppear(animated: Bool) {
-        getOrdersRequest()
+        hiGetOrders()
     }
 
     // MARK: - Table view data source
@@ -189,55 +136,38 @@ class DataTableViewController3: UITableViewController,NSFetchedResultsController
     }
     
     
-    
-    func getOrdersRequest(){
+    //请求数据
+    func hiGetOrders(){
         guard userLocal._id != "" else {return}
         spinner.startAnimating()
-        print("getGetActiveOrdersRequest")
-        let items = ["method":"grabbed order",
-                     "_id":userLocal._id,
-                     "token":userLocal.token]
-        SocketConnect.socket.emit("grabbed order", items)
+        getOrders.getGetActiveOrders()
     }
     
-    func orderRefuseListener(){
-        guard self.userLocal._id != "" else {return}
-        
-        SocketConnect.socket.on("order refuse") { data, ack in
-            print("你有订单被拒接")
-            self.noticeTop("你有订单被拒接", autoClear: true, autoClearTime: 1)
-            self.getOrdersRequest()
-        }
+    
+    //监听抢到的订单是否被接受
+    func beComfirmed() {
+        self.noticeTop("你有订单被确认", autoClear: true, autoClearTime: 1)
+        self.hiGetOrders()
+    }
+    
+    //监听抢到的订单是否被拒接
+    func beRefuse() {
+        self.noticeTop("你有订单被拒接", autoClear: true, autoClearTime: 1)
+        self.hiGetOrders()
     }
     
     //监听"得到GetActiveOrders"操作
-    func getNewGetActiveOrders(data: AnyObject) {
-        print("getNewGetActiveOrders")
+    func getActiveOrdersListener(data: [OrderLocal]) {
         
-        //将data转成JSON格式
-        let dataString = String((data as! NSArray)[0])
-        let jsonData = dataString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        let dataJson = JSON(data:jsonData!)
-        //print(dataJson)
-        
-        myGetOrders.removeAll()
-        for i in 0..<dataJson["data"].count {
-            imageURLs.append(dataJson["data"][i]["publisher_avatar"].string!)
-            myGetOrders.append(OrderLocal(
-                publisherImage: UIImagePNGRepresentation(UIImage(named:"b004")!),
-                publisherName: dataJson["data"][i]["publisher_name"].string!,
-                location: dataJson["data"][i]["location"].string!,
-                status: dataJson["data"][i]["status"].string!,
-                detail: dataJson["data"][i]["detail"].string!,
-                cost: String(dataJson["data"][i]["cost"]),
-                publisherTel: String(dataJson["data"][i]["phone"]),
-                time: dataJson["data"][i]["time"].string!,
-                publisherID: dataJson["data"][i]["publisher"].string!,
-                id: dataJson["data"][i]["_id"].string!,
-                receiver: dataJson["data"][i]["receiver"].string!))
+        myGetOrders = data
+        imageURLs.removeAll()
+        for order in myGetOrders {
+            self.imageURLs.append(order.publisherImageID)
         }
+        //print(data)
         self.spinner.stopAnimating()
         self.refreshControl?.endRefreshing()
+        print("刷新列表")
         tableView.reloadData()
     }
 

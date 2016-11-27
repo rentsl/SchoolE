@@ -7,13 +7,11 @@
 //
 
 import UIKit
-import CoreData
-import SwiftyJSON
 
-class DataTableViewController: UITableViewController,NSFetchedResultsControllerDelegate,OutAvailableOrderslisten {
+
+class DataTableViewController: UITableViewController,OutAvailableOrdersProtocol,GrabOrderProtocol {
     
     var dataObject: String!
-    var frc: NSFetchedResultsController!
     var isDel = false
     //var orders: [Order] = []
     var selectRow: NSIndexPath?
@@ -21,6 +19,8 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
     var imageURLs: [String] = []
     var myOutOrders: [OrderLocal] = []
     var userLocal = LoginUser.sharedLoginUser
+    let getOrders = SocketGetOutAVOrders()
+    var grabJudge = SocketGrabOrder()
     
     @IBOutlet var spinner: UIActivityIndicatorView!
     
@@ -28,13 +28,12 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
         super.viewDidLoad()
         print("index:\(index)")
         
-        orderGrabListener() //监听是否有人抢单
 
-        let getOrders = SocketGetOutAVOrders()
+        grabJudge.delegate = self
         getOrders.delegate = self
-        getOrders.getOutAvailableOrders()
         
-        getOrdersRequest() //请求获取数据
+        grabJudge.grabOrderListener() //监听是否有人抢单
+        hiGetOrders() //请求获取数据
         
         spinner.hidesWhenStopped = true
         spinner.center = view.center
@@ -44,82 +43,21 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = UIColor.whiteColor()
         refreshControl?.tintColor = UIColor.grayColor()
-        refreshControl?.addTarget(self, action: "getOrdersRequest", forControlEvents: .ValueChanged)
+        refreshControl?.addTarget(self, action: "hiGetOrders", forControlEvents: .ValueChanged)
         
         
         //UI属性操作
         /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None //去掉系统自带的分割线
         /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-        
-        
-        
-        
-        
-        
-        //本地cocodata数据请求
-        /*--------------------------------------------------------------*/
-        //let request = NSFetchRequest(entityName: "Order")
-        //request.sortDescriptors = [NSSortDescriptor(key: "location", ascending: true)]
-        //let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-        //frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: buffer!, sectionNameKeyPath: nil, cacheName: nil)
-        //frc.delegate = self
-        //
-        //
-        //do {
-        //    try frc.performFetch()
-        //    myOutOrders =  frc.fetchedObjects as! [Order]
-        //} catch {
-        //    print(error)
-        //}
-        /*--------------------------------------------------------------*/
+    
     }
     
     
     
     
-    
-    
-    //cocodata中数据发生变化时执行
-    
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    //func controllerWillChangeContent(controller: NSFetchedResultsController) {
-    //    tableView.beginUpdates()
-    //}
-    //
-    //func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    //    tableView.endUpdates()
-    //}
-    //
-    //func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-    //    //不是很理解 这里的if语句
-    //    if self.index ==  1 {
-    //        switch type {
-    //        case .Insert:
-    //            if let _newIndexPath = newIndexPath {
-    //                tableView.insertRowsAtIndexPaths([_newIndexPath], withRowAnimation: .Automatic)
-    //            }
-    //        case .Delete:
-    //            if let _indexPath = indexPath {
-    //                tableView.deleteRowsAtIndexPaths([_indexPath], withRowAnimation: .Automatic)
-    //            }
-    //
-    //        case .Update:
-    //            if let _indexPath = indexPath {
-    //                tableView.reloadRowsAtIndexPaths([_indexPath], withRowAnimation: .Automatic)
-    //            }
-    //        default:
-    //            tableView.reloadData()
-    //
-    //        }
-    //    }
-    //
-    //    myOutOrders = controller.fetchedObjects as! [Order]
-    //}
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    
     override func viewDidAppear(animated: Bool) {
-        getOrdersRequest()
+        hiGetOrders()
     }
     
     override func didReceiveMemoryWarning() {
@@ -211,62 +149,30 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
     
     
     
-    func getOrdersRequest() {
+    func hiGetOrders() {
         guard userLocal._id != "" else {return}
         spinner.startAnimating()
-        if self.userLocal._id != "" {
-            print("getOutActiveOrdersRequest")
-            let items = ["method":"published order",
-                         "_id":self.userLocal._id,
-                         "token":self.userLocal.token]
-            SocketConnect.socket.emit("published order", items)
-        }
-    }
-    
-    func orderGrabListener(){
-        SocketConnect.socket.on("order grab") { data,ack in
-            print("orderGrabListener:有人抢单!")
-            print("刷新列表")
-            self.noticeTop("有人抢单!", autoClear: true, autoClearTime: 1)
-            self.getOrdersRequest()
-        }
+        self.getOrders.getOutAvailableOrders()
     }
     
     
     //监听"得到outAvailableOrders"操作
-    func getNewOutAvailableOrders(data: AnyObject) {
-        print("getNewOutAvailableOrders")
+    func outAvailableOrdersListener(data: [OrderLocal]) {
+        myOutOrders = data
         
-        //将data转成JSON格式
-        let dataString = String((data as! NSArray)[0])
-        let jsonData = dataString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        let dataJson = JSON(data:jsonData!)
-        //print(dataJson)
-        
-        myOutOrders.removeAll()
-        for i in 0..<dataJson["data"].count {
-            imageURLs.append(dataJson["data"][i]["publisher_avatar"].string!)
-            myOutOrders.append(OrderLocal(
-                publisherImage: UIImagePNGRepresentation(UIImage(named:"b004")!),
-                publisherName: dataJson["data"][i]["publisher_name"].string!,
-                location: dataJson["data"][i]["location"].string!,
-                status: dataJson["data"][i]["status"].string!,
-                detail: dataJson["data"][i]["detail"].string!,
-                cost: String(dataJson["data"][i]["cost"]),
-                publisherTel: String(dataJson["data"][i]["phone"]),
-                time: dataJson["data"][i]["time"].string!,
-                publisherID: dataJson["data"][i]["publisher"].string!,
-                id: dataJson["data"][i]["_id"].string!,
-                receiver: dataJson["data"][i]["receiver"].string!))
-        }
         self.spinner.stopAnimating()
         self.refreshControl?.endRefreshing()
+        print("刷新列表")
         tableView.reloadData()
     }
 
+    //监听订单是否被抢
+    func beGrabbed(data: AnyObject) {
+        self.noticeTop("有人抢单!", autoClear: true, autoClearTime: 1)
+        self.hiGetOrders()
+    }
+
     
-
-
 
  
    
@@ -278,7 +184,6 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
             let destVC = segue.destinationViewController as! OrderDetailViewController2
 
             destVC.myOutOrders = myOutOrders[tableView.indexPathForSelectedRow!.row]
-            destVC.imageURL = imageURLs[tableView.indexPathForSelectedRow!.row]
             destVC.index = index
             destVC.selectRow = tableView.indexPathForSelectedRow
 
@@ -291,38 +196,6 @@ class DataTableViewController: UITableViewController,NSFetchedResultsControllerD
     @IBAction func backToOrders2(_: UIStoryboardSegue){
         //if let reviewVC = segue.sourceViewController as? OrderDetailViewController2{
             
-            //本地cocodata删除操作
-            /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-            //if let _isDel = reviewVC.isDel{
-            //    self.isDel = _isDel
-            //
-            //}
-            //
-            //if let _selectRow = reviewVC.selectRow{
-            //    self.selectRow = _selectRow
-            //}
-            //
-            ////删除订单
-            //
-            //print("hi")
-            //print(self.isDel)
-            //if isDel == true {
-            //    print("hi")
-            //    let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-            //    let orderToDel = frc.objectAtIndexPath(selectRow!) as! Order
-            //    buffer?.deleteObject(orderToDel)
-            //
-            //    do {
-            //        try buffer?.save()
-            //    } catch {
-            //        print(error)
-            //    }
-            //
-            //    self.notice("删除成功", type: NoticeType.success, autoClear: true)
-            //
-            //}
-            /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-       // }
     }
     
 

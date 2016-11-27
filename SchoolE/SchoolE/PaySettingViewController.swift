@@ -4,7 +4,16 @@
 //
 //  Created by rentsl on 16/8/4.
 //  Copyright © 2016年 rentsl. All rights reserved.
-//
+
+//////////////////////////////////////////
+//                                      //
+//                                      //
+//                                      //
+//                 作废                  //
+//                                      //
+//                                      //
+//                                      //
+//////////////////////////////////////////
 
 import UIKit
 import CoreData

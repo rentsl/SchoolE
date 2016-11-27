@@ -21,6 +21,7 @@ struct OrderLocal {
     var publisherID : String
     var id : String
     var receiver : String
+    var publisherImageID : String
 }
 
 

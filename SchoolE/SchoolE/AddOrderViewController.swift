@@ -36,28 +36,6 @@ class AddOrderViewController: UIViewController,UIPickerViewDelegate,UIPickerView
         if userLogin._id == "" || userLogin.token == "" { return }
         
         orderPublishRequest()
-        
-        //本地存储操作
-        /*-------------------------------------------------------------*/
-//        let buffer = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-//        let order = NSEntityDescription.insertNewObjectForEntityForName("Order", inManagedObjectContext: buffer!) as! Order
-//        
-//        order.location = location.text
-//        order.detail = detail.text
-//        order.money = money.text
-//        order.userTel = tel.text
-//        order.userName = userLogin.userName
-//        order.userImage = userLogin.userImage
-//        order.time = systemTime.getTime()
-//        order.orderState = "等人抢单"
-//        
-//        do {
-//            try  buffer?.save()
-//        } catch {
-//            print(error)
-//        }
-        /*-------------------------------------------------------------*/
-        
         //退场
         performSegueWithIdentifier("backToRGPageView", sender: sender)
     }
@@ -65,19 +43,8 @@ class AddOrderViewController: UIViewController,UIPickerViewDelegate,UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //navigationBar自定义
-        self.navigationController?.navigationBar.hideBottomHairline()
-        self.navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1)
-        
-        if let font = UIFont(name: "Avenir-Light", size: 20) {
-            self.navigationController?.navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName:UIColor(red: 242/255, green: 116/255, blue: 119/255, alpha: 1),
-                NSFontAttributeName:font
-            ]
-        }
-        self.navigationController?.navigationBar.barStyle = .Default
+
+        self.navigationController?.navigationBar.setWhiteStyle() //navigationBar自定义
         locationPicker.center = view.center
         locationPicker.backgroundColor = UIColor.whiteColor()
         locationPicker.delegate = self
