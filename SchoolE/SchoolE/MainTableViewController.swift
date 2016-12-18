@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,DownLoadImgeProtocol,ActiveOrdersListenProtocol{
+class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,DownLoadImgeProtocol,ActiveOrdersListenProtocol,RefreshViewDelegate{
 
     var userLogin = LoginUser.sharedLoginUser
     var orders:[Order] = []
@@ -18,11 +18,15 @@ class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,Do
     let getImage = DownLoadImage()
     let getOrders = AvailableOrdersDataSource()
     let activeOrdersListener = ActiveOrdersListen()
+    private var refreshView: RefreshView!
+    var isFirstTimeRefresh = true
     
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         getImage.delegate = self
         getOrders.delegate = self
@@ -36,17 +40,22 @@ class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,Do
          * 所以这里的监听能得带反馈,但是及其不安全
          */
         SocketConnect.socket.once("connect") { data,ack in
-            self.getOrders.getAvailableOrders(self.userLogin._id)
+            self.hiGetOrders()
         }
         
         spinner.hidesWhenStopped = true
         spinner.center = view.center
         view.addSubview(spinner)
         
-        refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = UIColor.whiteColor()
-        refreshControl?.tintColor = UIColor.grayColor()
-        refreshControl?.addTarget(self, action: "hiGetOrders", forControlEvents: .ValueChanged)
+        
+        refreshView = RefreshView(scrollView: tableView) //初始化refresher
+        refreshView.delegate = self
+        view.insertSubview(refreshView, atIndex: 0)
+        
+//        refreshControl = UIRefreshControl()
+//        refreshControl?.backgroundColor = UIColor.whiteColor()
+//        refreshControl?.tintColor = UIColor.grayColor()
+//        refreshControl?.addTarget(self, action: "hiGetOrders", forControlEvents: .ValueChanged)
         
         
         
@@ -73,7 +82,8 @@ class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,Do
 
     
     @IBAction func reflash(sender: UIBarButtonItem) {
-        hiGetOrders()
+        refreshView.beginRefreshing()
+        //hiGetOrders()
     }
     
 
@@ -92,7 +102,11 @@ class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,Do
             i = i + 1
         }
         self.spinner.stopAnimating()
-        self.refreshControl?.endRefreshing()
+        print(isFirstTimeRefresh)
+        if !isFirstTimeRefresh {
+            self.refreshView.endRefreshing()
+        }
+        isFirstTimeRefresh = false
         tableView.reloadData()
     }
     
@@ -107,9 +121,13 @@ class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,Do
     func activeOrderDidChange(state:String) {
         switch state {
         case _new:
-            self.hiGetOrders()
+            print("have new")
+            self.refreshView.beginRefreshing()
+            //self.hiGetOrders()
         case _remove:
-            self.hiGetOrders()
+            self.refreshView.beginRefreshing()
+            //self.hiGetOrders()
+            
         case _vary:
             break
         default:
@@ -165,8 +183,24 @@ class MainTableViewController: UITableViewController ,AvailableOrdersProtocol,Do
         image.clipsToBounds = true
     }
 
+    //refreshView
+    /*------------------------------------------------------------------*/
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        print(scrollView.contentOffset)
+        refreshView.scrollViewDidScroll(tableView)
+    }
     
-
+    override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        refreshView.scrollViewWillEndDragging(tableView, withVelocity: velocity, targetContentOffset: targetContentOffset)
+    }
+    
+    
+    //MARK: - RefreshViewDelegate
+    func refreshViewWillRefresh() {
+        hiGetOrders()
+    }
+    /*------------------------------------------------------------------*/
+    
     
     // MARK: - Navigation
 

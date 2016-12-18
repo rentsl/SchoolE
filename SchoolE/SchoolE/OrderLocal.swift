@@ -9,7 +9,6 @@
 import Foundation
 
 struct OrderLocal {
-    
     var publisherImage : NSData?
     var publisherName : String
     var location : String

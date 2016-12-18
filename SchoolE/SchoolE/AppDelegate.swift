@@ -68,16 +68,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                         
                         if let jsonData = json.valueForKey("data") as? NSDictionary {
                             
+                            print(jsonData)
+                            
                             //保存到用户单例
                             self.userLogin._id = jsonData.valueForKey("_id") as! String
                             self.userLogin.authenticated = ((jsonData.valueForKey("authenticated") as? NSNumber)?.stringValue)!
-                            self.userLogin.name = "" // 需要添加 服务器端还没
+                            self.userLogin.name = jsonData.valueForKey("real_name") as! String
                             self.userLogin.password = jsonData.valueForKey("password") as! String
                             self.userLogin.paynumber = jsonData.valueForKey("pay_number") as! String
                             self.userLogin.school = jsonData.valueForKey("school") as! String
                             self.userLogin.studentID = jsonData.valueForKey("student_id") as! String
                             self.userLogin.token = jsonData.valueForKey("token") as! String
-                            self.userLogin.userName = jsonData.valueForKey("phone") as! String
+                            self.userLogin.userName = jsonData.valueForKey("username") as! String
                             self.userLogin.userTel = jsonData.valueForKey("phone") as! String
                             self.userLogin.state = 1
                             
@@ -101,7 +103,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                         
                     }else if json.valueForKey("result") as! String == self.signInTokenPasswordError {
                         print("token错误")
-
+                        
+                        let alert = UIAlertController(title: "账号过期", message: "请重新登陆", preferredStyle: .Alert)
+                        let comfirm = UIAlertAction(title: "确定", style: .Default, handler: nil)
+                        alert.addAction(comfirm)
+                        
+                        let aW = UIWindow(frame: UIScreen.mainScreen().bounds)
+                        aW.rootViewController = UIViewController()
+                        aW.windowLevel = UIWindowLevelAlert + 1
+                        aW.makeKeyAndVisible()
+                        aW.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+                        
                     }else if json.valueForKey("result") as! String == self.signInTokenNotExist {
                         print("ID不存在！")
                     }
@@ -197,6 +209,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
+        //从后台回来时 进行socketlogin
+        SocketConnect.socket.once("connect") {_,_ in self.socketLogin()}
+        
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

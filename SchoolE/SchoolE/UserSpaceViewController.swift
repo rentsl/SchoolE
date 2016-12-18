@@ -88,6 +88,8 @@ class UserSpaceViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("UserSpaceViewController did")
+        print(userLogin.name)
         
         //取消按钮点击效果
         userImageB.adjustsImageWhenHighlighted = false
@@ -107,7 +109,8 @@ class UserSpaceViewController: UIViewController {
     }
 
     override func viewDidAppear(animated: Bool) {
-   
+        print("UserSpaceViewController appear")
+        print(userLogin.name)
         userImageB.setImage(UIImage(data: userLogin.userImage!), forState: .Normal)
         userName.text = userLogin.userName
         

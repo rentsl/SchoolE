@@ -18,7 +18,16 @@ struct User1 {
     var name: String
     var payNumber: String
     
-    init(userName: String, userImage: String, password: String, userTel: String, school: String, studentID: String, name: String, payNumber: String) {
+    init(
+        userName: String,
+        userImage: String,
+        password: String,
+        userTel: String,
+        school: String,
+        studentID: String,
+        name: String,
+        payNumber: String
+    ) {
         self.name = name
         self.password = password
         self.payNumber = payNumber

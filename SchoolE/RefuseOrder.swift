@@ -39,6 +39,7 @@ class RefuseOrder {
         print("启动refusedListener")
         SocketConnect.socket.on("order refuse") { data,ack in
             let dataJson = MyTools.socketIODataToJSON(data)
+            print(dataJson["result"].string)
             guard dataJson["result"].string == _refused else {return}
             print("订单被拒绝")
             self.delegate?.beRefuse!()

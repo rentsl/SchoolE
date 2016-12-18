@@ -17,6 +17,7 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var detail: UILabel!
     @IBOutlet weak var state: UILabel!
     @IBOutlet weak var time: UILabel!
+    @IBOutlet weak var stateImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

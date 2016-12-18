@@ -20,9 +20,11 @@ class ChosePersonViewController: UIViewController ,DownLoadImgeProtocol,ConfirmO
     let imageInit: NSData = UIImagePNGRepresentation(UIImage(named: "b004")!)!
     var present:UIViewController?
     
+    @IBOutlet weak var personTel: UILabel!
     @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var personName: UILabel!
     @IBOutlet weak var personRequestStatus: UILabel!
+    @IBOutlet weak var comfireButton: UIButton!
     
 
     override func viewDidLoad() {
@@ -37,6 +39,7 @@ class ChosePersonViewController: UIViewController ,DownLoadImgeProtocol,ConfirmO
         self.navigationController?.navigationBar.setWhiteStyle()
         
         personName.text = ImageCash.receiverNAme[orderLocal.receiver]//?
+        comfireButton.tintColor = UIPinkColor
         personImage.image = UIImage(data: imageInit)
         
         personImage.frame.size.width = 128.0
@@ -83,6 +86,7 @@ class ChosePersonViewController: UIViewController ,DownLoadImgeProtocol,ConfirmO
             //print(dataJson)
             
             self.personName.text = dataJson["data"]["username"].string
+            self.personTel.text = dataJson["data"]["phone"].string
             self.getImage.downLoadImageWithURLAndIndex(0, imageURL: dataJson["data"]["avatar"].string!,info: "")
             //缓存
             ImageCash.receiverNAme[receiverID] = dataJson["data"]["username"].string!

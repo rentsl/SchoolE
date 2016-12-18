@@ -30,8 +30,8 @@ class DataTableViewController3: UITableViewController,GetActiveOrdersProtocol,Re
         refusedListener.delegate = self
         comfirmedListener.delegate = self
         
-        refusedListener.refusedListener()
-        comfirmedListener.comfirmedListener()
+        refusedListener.refusedListener()     //监听是否被拒接
+        comfirmedListener.comfirmedListener() //监听是否被接受
         
         hiGetOrders() //请求获取数据
         
