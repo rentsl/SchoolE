@@ -42,6 +42,8 @@ class DownLoadImage{
             }
             //添加到下载队列
             ImageCash.imageDownQueueByURL[imageURL] = imageURL
+        case "nil":
+            self.delegate?.downImageListener(index, imageData: UIImagePNGRepresentation(UIImage(named:"b004")!)!, info: info)
         default:
             self.delegate?.downImageListener(index, imageData: UIImagePNGRepresentation(UIImage(named:"b004")!)!, info: info)
         }
@@ -49,7 +51,9 @@ class DownLoadImage{
     }
     
     func downImageState(imageURL:String) -> String{
-        if (ImageCash.imageDataByURl[imageURL]) != nil {
+        if imageURL == "" {
+            return "nil"
+        }else if (ImageCash.imageDataByURl[imageURL]) != nil {
             return "HaveCash"
         }else if (ImageCash.imageDownQueueByURL[imageURL] != nil) {
             return "DownLoading"
